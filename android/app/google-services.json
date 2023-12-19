@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661304143028",
+    "project_id": "nutriped-01",
+    "storage_bucket": "nutriped-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661304143028:android:3321f58b184b10704c3be1",
+        "android_client_info": {
+          "package_name": "com.example.nutriped"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMz7VaaS23qDYfco46vC7vnmojTVBJ-UU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

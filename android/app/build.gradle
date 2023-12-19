@@ -1,5 +1,6 @@
 plugins {
     id "com.android.application"
+    id "com.google.gms.google-services"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
@@ -45,10 +46,11 @@ android {
         applicationId "com.example.nutriped"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -64,4 +66,9 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'androidx.multidex:multidex:2.0.1'
+}
