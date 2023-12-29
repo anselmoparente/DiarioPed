@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -6,6 +9,8 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    Timer(const Duration(seconds: 3), () => context.go('/login'));
 
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
