@@ -10,7 +10,7 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Timer(const Duration(seconds: 3), () => context.go('/login'));
+    Timer(const Duration(seconds: 3), () => context.go('/access'));
 
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
