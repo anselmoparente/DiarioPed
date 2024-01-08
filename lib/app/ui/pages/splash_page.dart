@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.indigo[900],
+                color: Colors.blue.shade900,
               ),
             ),
             Image.asset(
