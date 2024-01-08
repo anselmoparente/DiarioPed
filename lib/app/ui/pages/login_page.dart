@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.blue.shade900,
-          onPressed: () => Navigator.pushNamed(context, '/access'),
+          onPressed: () => GoRouter.of(context).pop(),
         ),
       ),
       backgroundColor: Colors.white,
