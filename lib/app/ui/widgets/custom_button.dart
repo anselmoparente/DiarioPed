@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutriped/app/ui/theme/design_system.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -22,7 +23,7 @@ class CustomButton extends StatelessWidget {
       height: 48.0,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor ?? Colors.blue.shade900,
+          backgroundColor: backgroundColor ?? NutripedColors.button,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -39,6 +40,7 @@ class CustomButton extends StatelessWidget {
                     child: Icon(
                       prefixIcon,
                       color: Colors.white,
+                      size: 24.0,
                     ),
                   )
                 : Container(),
@@ -52,7 +54,8 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Text(
                       text,
-                      style: const TextStyle(color: Colors.white),
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 18.0),
                     ),
                   ),
           ],

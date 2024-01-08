@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 
 class AccessPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class AccessPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: NutripedColors.backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,12 +26,14 @@ class AccessPage extends StatelessWidget {
                 'Como você se qualifica?',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 24.0,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w500,
+                  color: NutripedColors.text,
                 ),
               ),
             ),
+            const SizedBox(height: 32.0),
             SizedBox(
               width: size.width * 0.8,
               child: CustomButton(
