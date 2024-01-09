@@ -17,20 +17,17 @@ class AccessPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: size.height * 0.15,
+              height: size.height * 0.2,
               child: Image.asset('assets/images/splash_icon.png'),
             ),
-            Container(
-              margin: EdgeInsets.only(top: size.height * 0.075),
-              child: const Text(
-                'Como você se qualifica?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  color: NutripedColors.text,
-                ),
+            const Text(
+              'Como você se qualifica?',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24.0,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w500,
+                color: NutripedColors.text,
               ),
             ),
             const SizedBox(height: 32.0),
