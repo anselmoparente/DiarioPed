@@ -46,7 +46,7 @@ class CustomButton extends StatelessWidget {
                 : Container(),
             (isLoading == true)
                 ? const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: Colors.white),
                   )
                 : Container(
                     margin: EdgeInsets.only(
