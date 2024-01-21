@@ -3,12 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/login_controller.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
-import 'package:nutriped/app/utils.dart';
 
 class LoginPage extends StatefulWidget {
-  final TypeUser type;
-
-  const LoginPage({super.key, required this.type});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -59,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: CustomTextFormField(
                       controller: email,
-                      hintText: 'Email',
+                      label: 'Email',
                     ),
                   ),
                   Container(
@@ -70,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: CustomTextFormField(
                       controller: password,
-                      hintText: 'Senha',
+                      label: 'Senha',
                       obscureText: true,
                     ),
                   ),
