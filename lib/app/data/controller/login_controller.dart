@@ -19,12 +19,15 @@ class LoginController {
         final user = auth.user;
 
         print(user);
+        isLoading$.value = false;
 
-        return (true, '');
+        return (true, null);
       } catch (e) {
+        isLoading$.value = false;
         return (false, 'Não foi possivel conectar!');
       }
     } else {
+      isLoading$.value = false;
       return (false, 'Credenciais inválidas!');
     }
   }
