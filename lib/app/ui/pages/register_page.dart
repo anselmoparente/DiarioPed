@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/controller/register_controller.dart';
+import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -9,6 +12,19 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final RegisterController _controller = RegisterController();
+
+  @override
+  void initState() {
+    _controller.register(
+      email: 'anselmoparente@gmail.com',
+      password: '34784575',
+      passwordConfirmation: '34784575',
+      auth: context.read<AuthService>(),
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

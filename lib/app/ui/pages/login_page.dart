@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/login_controller.dart';
+import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -82,7 +84,14 @@ class _LoginPageState extends State<LoginPage> {
                 builder: (BuildContext context, Widget? child) {
                   return CustomButton(
                     text: 'Login',
-                    onPressed: () {},
+                    isLoading: controller.isLoading,
+                    onPressed: () async {
+                      await controller.login(
+                        email: email.text,
+                        password: password.text,
+                        auth: context.read<AuthService>(),
+                      );
+                    },
                   );
                 },
               ),

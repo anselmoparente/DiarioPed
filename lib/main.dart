@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
@@ -5,9 +6,12 @@ import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
 import 'package:nutriped/app/ui/pages/splash_page.dart';
+import 'package:nutriped/firebase_options.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }
 
