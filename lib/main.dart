@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
 import 'package:nutriped/app/ui/pages/splash_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MainApp());
@@ -40,8 +42,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthService()),
+      ],
+      child: MaterialApp.router(
+        routerConfig: _router,
+      ),
     );
   }
 }
