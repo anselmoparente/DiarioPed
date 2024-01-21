@@ -12,7 +12,7 @@ class SplashPage extends StatelessWidget {
 
     Timer(
       const Duration(seconds: 3),
-      () => GoRouter.of(context).pushNamed('/access'),
+      () => GoRouter.of(context).pushReplacementNamed('/access'),
     );
 
     return Scaffold(

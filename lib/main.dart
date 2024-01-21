@@ -4,6 +4,7 @@ import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
 import 'package:nutriped/app/ui/pages/splash_page.dart';
+import 'package:nutriped/app/utils.dart';
 
 void main() {
   runApp(const MainApp());
@@ -23,7 +24,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'login',
           name: '/login',
-          builder: (context, state) => const LoginPage(),
+          builder: (context, state) => LoginPage(type: state.extra as TypeUser),
         ),
         GoRoute(
           path: 'register',
