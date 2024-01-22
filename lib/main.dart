@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:nutriped/app/ui/pages/home_page.dart';
 import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
@@ -29,7 +30,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'home',
           name: '/home',
-          builder: (context, state) => const AccessPage(),
+          builder: (context, state) => const HomePage(),
         ),
         GoRoute(
           path: 'login',

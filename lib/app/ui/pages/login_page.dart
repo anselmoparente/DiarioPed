@@ -86,11 +86,17 @@ class _LoginPageState extends State<LoginPage> {
                     text: 'Login',
                     isLoading: controller.isLoading,
                     onPressed: () async {
-                      await controller.login(
+                      await controller
+                          .login(
                         email: email.text,
                         password: password.text,
                         auth: context.read<AuthService>(),
-                      );
+                      )
+                          .then((value) {
+                        if (value.$1) {
+                          GoRouter.of(context).pushReplacementNamed('/home');
+                        }
+                      });
                     },
                   );
                 },

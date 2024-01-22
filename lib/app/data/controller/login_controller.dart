@@ -15,10 +15,6 @@ class LoginController {
     if (email.isNotEmpty && password.isNotEmpty) {
       try {
         await auth.login(email, password);
-
-        final user = auth.user;
-
-        print(user);
         isLoading$.value = false;
 
         return (true, null);
