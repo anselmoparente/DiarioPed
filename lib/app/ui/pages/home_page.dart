@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.white,
           onPressed: () => GoRouter.of(context).pop(),
         ),
         title: const Text('DashBoard'),
@@ -21,6 +22,23 @@ class HomePage extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+      ),
+      body: const Center(
+        child: IntrinsicHeight(
+          child: Column(
+            children: [
+              Icon(
+                Icons.group_off,
+                size: 124.0,
+                color: NutripedColors.button,
+              ),
+              Text(
+                'No momento, ainda não existe nenhum paciente cadastrado!',
+                style: TextStyle(fontSize: 24.0, color: Colors.black),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
