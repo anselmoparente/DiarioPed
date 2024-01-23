@@ -7,34 +7,49 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: NutripedColors.backgroundColor,
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: NutripedColors.button,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: const Icon(Icons.logout),
           color: Colors.white,
           onPressed: () => GoRouter.of(context).pop(),
         ),
-        title: const Text('DashBoard'),
+        title: const Text(
+          'DashBoard',
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.person),
+            icon: const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
             onPressed: () {},
           ),
         ],
       ),
-      body: const Center(
+      body: Center(
         child: IntrinsicHeight(
           child: Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.group_off,
-                size: 124.0,
-                color: NutripedColors.button,
+                size: 108.0,
+                color: NutripedColors.icon,
               ),
-              Text(
-                'No momento, ainda não existe nenhum paciente cadastrado!',
-                style: TextStyle(fontSize: 24.0, color: Colors.black),
+              const SizedBox(height: 16.0),
+              SizedBox(
+                width: size.width * 0.8,
+                child: const Text(
+                  'No momento, ainda não existe nenhum paciente vinculado!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18.0, color: NutripedColors.text),
+                ),
               )
             ],
           ),

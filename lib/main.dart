@@ -57,6 +57,7 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthService()),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: _router,
       ),
     );
