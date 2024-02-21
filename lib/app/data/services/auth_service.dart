@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class AuthException {
@@ -10,7 +9,7 @@ class AuthException {
 
 class AuthService extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // FirebaseFirestore db = FirebaseFirestore.instance;
+
   User? user;
   bool isLoading = true;
 
@@ -32,29 +31,31 @@ class AuthService extends ChangeNotifier {
   }
 
   Future<void> register({
+    required String name,
     required String email,
     required String password,
-    // required AdvocateModel advocate,
   }) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
+
       _getUser();
 
-      // db.collection('lawyers').doc(user!.uid).set(
-      //   {
-      //     'id': user!.uid,
-      //     'name': advocate.name,
-      //     'phone': advocate.phone,
-      //     'cpf': advocate.cpf,
-      //     'oab': advocate.oab,
-      //     'officeAddress': advocate.officeAddress,
-      //     'officeWebsite': advocate.officeWebsite,
-      //     'image': advocate.image,
-      //   },
-      // );
+      if (_auth.currentUser != null) {
+        DatabaseReference reference = FirebaseDatabase.instance.ref().child(
+              'users/${_auth.currentUser!.uid}',
+            );
+
+        await reference.set(
+          {
+            'name': name,
+            'email': email,
+          },
+        );
+      }
     } on FirebaseAuthException catch (e) {
-      log('error: ${e.code}');
       if (e.code == 'weak-password') {
         throw AuthException('A senha é muito fraca!');
       } else if (e.code == 'email-already-in-use') {

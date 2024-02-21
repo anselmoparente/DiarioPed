@@ -5,27 +5,30 @@ class RegisterController {
   var isLoading$ = ValueNotifier(false);
   bool get isLoading => isLoading$.value;
 
+  final AuthService _auth = AuthService();
+
   Future<(bool, String?)> register({
+    required String name,
     required String email,
     required String password,
     required String passwordConfirmation,
-    required AuthService auth,
   }) async {
     isLoading$.value = true;
 
     if (email.isNotEmpty &&
         (password.isNotEmpty && passwordConfirmation.isNotEmpty) &&
-        password == passwordConfirmation) {
+        password == passwordConfirmation &&
+        name.length > 6) {
       try {
-        isLoading$.value = false;
+        await _auth.register(name: name, email: email, password: password);
 
-        auth.register(email: email, password: password);
+        isLoading$.value = false;
 
         return (true, null);
-      } catch (e) {
+      } on AuthException catch (e) {
         isLoading$.value = false;
 
-        return (false, e.toString());
+        return (false, e.message);
       }
     } else if (password != passwordConfirmation) {
       isLoading$.value = false;

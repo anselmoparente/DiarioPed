@@ -9,6 +9,7 @@ environment:
 dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
+  firebase_database: ^10.4.6
   flutter:
     sdk: flutter
   go_router: ^13.0.0

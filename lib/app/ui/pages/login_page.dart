@@ -92,11 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                         password: password.text,
                         auth: context.read<AuthService>(),
                       )
-                          .then((value) {
-                        if (value.$1) {
-                          GoRouter.of(context).pushReplacementNamed('/home');
-                        }
-                      });
+                          .then(
+                        (value) {
+                          if (value.$1) {
+                            GoRouter.of(context).pushReplacementNamed('/home');
+                          }
+                        },
+                      );
                     },
                   );
                 },
