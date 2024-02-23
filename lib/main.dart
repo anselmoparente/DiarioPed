@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/pages/home_page.dart';
+import 'package:nutriped/app/ui/pages/link_page.dart';
 import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
@@ -13,6 +15,7 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MainApp());
 }
 
@@ -41,6 +44,11 @@ final GoRouter _router = GoRouter(
           path: 'register',
           name: '/register',
           builder: (context, state) => const RegisterPage(),
+        ),
+        GoRoute(
+          path: 'link',
+          name: '/link',
+          builder: (context, state) => const LinkPage(),
         ),
       ],
     ),

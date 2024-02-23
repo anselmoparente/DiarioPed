@@ -37,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
         leadingWidth: 110.0,
         leading: Center(
           child: GestureDetector(
-            onTap: () => Navigator.pop(context),
+            onTap: () => GoRouter.of(context).pop(),
             child: const Text(
               'Cancelar',
               style: TextStyle(fontSize: 18.0, color: Colors.blue),
