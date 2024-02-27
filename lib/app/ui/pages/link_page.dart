@@ -82,9 +82,18 @@ class _LinkPageState extends State<LinkPage> {
                     text: 'Vincular',
                     isLoading: _controller.isLoading,
                     onPressed: () async {
-                      _controller.linkPatient(
+                      await _controller
+                          .linkPatient(
                         name: name.text,
                         link: linkID.text,
+                      )
+                          .then(
+                        (value) {
+                          if (value.$1) {
+                            GoRouter.of(context)
+                                .pushReplacementNamed('/patient');
+                          } else {}
+                        },
                       );
                     },
                   );

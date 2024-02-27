@@ -7,6 +7,7 @@ import 'package:nutriped/app/ui/pages/home_page.dart';
 import 'package:nutriped/app/ui/pages/link_page.dart';
 import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
+import 'package:nutriped/app/ui/pages/patient_page.dart';
 import 'package:nutriped/app/ui/pages/register_page.dart';
 import 'package:nutriped/app/ui/pages/splash_page.dart';
 import 'package:nutriped/firebase_options.dart';
@@ -39,6 +40,11 @@ final GoRouter _router = GoRouter(
           path: 'login',
           name: '/login',
           builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: 'patient',
+          name: '/patient',
+          builder: (context, state) => const PatientPage(),
         ),
         GoRoute(
           path: 'register',
