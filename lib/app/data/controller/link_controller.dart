@@ -26,6 +26,10 @@ class LinkController {
       deviceID = iosInfo.identifierForVendor!;
     }
 
+    if (deviceID != null) {
+      deviceID = deviceID.replaceAll('.', '');
+    }
+
     final reference = FirebaseDatabase.instance.ref().child(
           'users/$link',
         );
@@ -45,6 +49,15 @@ class LinkController {
     }
 
     reference.update({'ids': ids});
+
+    final patientReference = FirebaseDatabase.instance.ref().child(
+          'patients/$deviceID',
+        );
+
+    patientReference.set({
+      'name': name,
+      'meals': [],
+    });
 
     return (false, null);
   }
