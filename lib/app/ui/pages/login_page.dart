@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/login_controller.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
+import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
 import 'package:provider/provider.dart';
 
@@ -125,10 +126,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () async {
                           if (isValidEmail(email.text)) {
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Esse email não é valido!'),
-                              ),
+                            CustomSnackBar(context).show(
+                              message: 'Esse email não é valido!',
                             );
                           }
                         },

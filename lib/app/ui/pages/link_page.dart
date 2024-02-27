@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/link_controller.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
+import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 
 class LinkPage extends StatefulWidget {
   const LinkPage({super.key});
@@ -90,9 +91,15 @@ class _LinkPageState extends State<LinkPage> {
                           .then(
                         (value) {
                           if (value.$1) {
-                            GoRouter.of(context)
-                                .pushReplacementNamed('/patient');
-                          } else {}
+                            GoRouter.of(context).pushReplacementNamed(
+                              '/patient',
+                            );
+                            CustomSnackBar(context).show(
+                              message: 'Vinculação finalizada com sucesso!',
+                            );
+                          } else {
+                            CustomSnackBar(context).show(message: value.$2!);
+                          }
                         },
                       );
                     },

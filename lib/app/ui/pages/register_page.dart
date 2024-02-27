@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/register_controller.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
+import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -123,10 +124,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             .then(
                           (value) {
                             if (value.$1) {
-                              GoRouter.of(context).pushReplacementNamed('/home');
+                              GoRouter.of(context)
+                                  .pushReplacementNamed('/home');
                             } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(value.$2 ?? '')),
+                              CustomSnackBar(context).show(
+                                message: value.$2!,
                               );
                             }
                           },
