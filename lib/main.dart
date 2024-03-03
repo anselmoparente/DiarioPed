@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/pages/home_page.dart';
+import 'package:nutriped/app/ui/pages/introduction_page.dart';
 import 'package:nutriped/app/ui/pages/link_page.dart';
 import 'package:nutriped/app/ui/pages/login_page.dart';
 import 'package:nutriped/app/ui/pages/access_page.dart';
@@ -35,6 +36,11 @@ final GoRouter _router = GoRouter(
           path: 'home',
           name: '/home',
           builder: (context, state) => const HomePage(),
+        ),
+        GoRoute(
+          path: 'introduction',
+          name: '/introduction',
+          builder: (context, state) => const IntroductionPage(),
         ),
         GoRoute(
           path: 'login',

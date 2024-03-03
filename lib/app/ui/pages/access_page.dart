@@ -36,7 +36,8 @@ class AccessPage extends StatelessWidget {
               child: CustomButton(
                 text: 'Sou um paciente',
                 prefixIcon: Icons.person,
-                onPressed: () => GoRouter.of(context).pushNamed('/link'),
+                onPressed: () =>
+                    GoRouter.of(context).pushNamed('/introduction'),
               ),
             ),
             const SizedBox(height: 16.0),
