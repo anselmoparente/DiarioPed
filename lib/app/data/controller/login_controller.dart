@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {
   var isLoading$ = ValueNotifier(false);
@@ -15,6 +16,12 @@ class LoginController {
     if (email.isNotEmpty && password.isNotEmpty) {
       try {
         await auth.login(email, password);
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        await prefs.setString('email', email);
+        await prefs.setString('pass', password);
+
         isLoading$.value = false;
 
         return (true, null);
