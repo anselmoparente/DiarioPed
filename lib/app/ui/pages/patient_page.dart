@@ -25,12 +25,11 @@ class _PatientPageState extends State<PatientPage> {
         leading: IconButton(
           icon: const Icon(Icons.logout),
           color: Colors.white,
-          onPressed: () {
-            _controller.logout(auth: context.read<AuthService>()).then((value) {
-              if (value) {
-                GoRouter.of(context).pushReplacementNamed('/access');
-              }
-            });
+          onPressed: () async {
+            await context.read<AuthService>().logout().then(
+                  (value) =>
+                      GoRouter.of(context).pushReplacementNamed('/access'),
+                );
           },
         ),
         title: const Text(

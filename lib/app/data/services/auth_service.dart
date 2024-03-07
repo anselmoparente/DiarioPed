@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthException {
   String message;
@@ -81,6 +82,12 @@ class AuthService extends ChangeNotifier {
   }
 
   Future<void> logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('patientID');
+    await prefs.remove('email');
+    await prefs.remove('pass');
+
     await _auth.signOut();
     _getUser();
   }

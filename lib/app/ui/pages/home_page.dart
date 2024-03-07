@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +19,12 @@ class HomePage extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.logout),
           color: Colors.white,
-          onPressed: () => GoRouter.of(context).pop(),
+          onPressed: () async {
+            await context.read<AuthService>().logout().then(
+                  (value) =>
+                      GoRouter.of(context).pushReplacementNamed('/access'),
+                );
+          },
         ),
         title: const Text(
           'DashBoard',
