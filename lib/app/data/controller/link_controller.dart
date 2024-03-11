@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LinkController {
   var isLoading$ = ValueNotifier(false);
@@ -60,6 +61,10 @@ class LinkController {
         'name': name,
         'meals': [],
       });
+
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setString('patientId', deviceID!);
 
       return (true, null);
     } catch (e) {
