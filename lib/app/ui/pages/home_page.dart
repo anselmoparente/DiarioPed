@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/controller/dashboard_controller.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final DashboardController controller = DashboardController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +43,73 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: IntrinsicHeight(
-          child: Column(
-            children: [
-              const Icon(
-                Icons.group_off,
-                size: 108.0,
-                color: NutripedColors.icon,
+      body: FutureBuilder(
+        future: controller.getPatients(auth: context.read<AuthService>()),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: NutripedColors.primary5,
               ),
-              const SizedBox(height: 16.0),
-              SizedBox(
-                width: size.width * 0.8,
-                child: const Text(
-                  'No momento, ainda não existe nenhum paciente vinculado!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0, color: NutripedColors.text),
+            );
+          }
+
+          if (controller.patients.isEmpty) {
+            Center(
+              child: IntrinsicHeight(
+                child: Column(
+                  children: [
+                    const Icon(
+                      Icons.group_off,
+                      size: 108.0,
+                      color: NutripedColors.icon,
+                    ),
+                    const SizedBox(height: 16.0),
+                    SizedBox(
+                      width: size.width * 0.8,
+                      child: const Text(
+                        'No momento, ainda não existe nenhum paciente vinculado!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 18.0, color: NutripedColors.text),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            );
+          }
+
+          return RawScrollbar(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            crossAxisMargin: 4.0,
+            radius: const Radius.circular(20.0),
+            thumbColor: Colors.grey,
+            child: GridView.count(
+              crossAxisCount: 2,
+              children: List.generate(controller.patients.length, (index) {
+                return Container(
+                  margin: const EdgeInsets.all(16.0),
+                  decoration: const BoxDecoration(
+                    color: NutripedColors.primary1,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      controller.patients[index].name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          );
+        },
       ),
     );
   }

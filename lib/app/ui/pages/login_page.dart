@@ -97,6 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                         (value) {
                           if (value.$1) {
                             GoRouter.of(context).pushReplacementNamed('/home');
+                          } else {
+                            CustomSnackBar(context).show(message: value.$2!);
                           }
                         },
                       );

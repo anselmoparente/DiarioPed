@@ -17,7 +17,7 @@ class _LinkPageState extends State<LinkPage> {
   TextEditingController name = TextEditingController();
   TextEditingController birthday = TextEditingController();
   TextEditingController linkID =
-      TextEditingController(text: '5ue0Ewvg8nhdD1FDUzwyf6VJx693');
+      TextEditingController(text: 'Kb0T73mIHAcGDz8VWpU9AMc90GJ2');
   DateTime? selectedDate;
 
   final LinkController _controller = LinkController();
@@ -115,6 +115,7 @@ class _LinkPageState extends State<LinkPage> {
                         await _controller
                             .linkPatient(
                           name: name.text,
+                          birthday: birthday.text,
                           link: linkID.text,
                         )
                             .then(

@@ -13,6 +13,7 @@ class LinkController {
 
   Future<(bool, String?)> linkPatient({
     required String name,
+    required String birthday,
     required String link,
   }) async {
     try {
@@ -59,6 +60,7 @@ class LinkController {
 
       patientReference.set({
         'name': name,
+        'birthday': birthday,
         'meals': [],
       });
 

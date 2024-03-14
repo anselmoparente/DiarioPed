@@ -26,6 +26,11 @@ class LoginController {
 
         return (true, null);
       } catch (e) {
+        if (e is AuthException) {
+          isLoading$.value = false;
+          return (false, e.message);
+        }
+
         isLoading$.value = false;
         return (false, 'Não foi possivel conectar!');
       }

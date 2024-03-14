@@ -20,13 +20,13 @@ class AuthService extends ChangeNotifier {
 
   _authCheck() {
     _auth.authStateChanges().listen((User? userListener) {
-      user = (userListener == null) ? userListener : null;
+      user = (userListener != null) ? userListener : null;
       isLoading = false;
       notifyListeners();
     });
   }
 
-  _getUser() {
+  Future _getUser() async {
     user = _auth.currentUser;
     notifyListeners();
   }
@@ -42,7 +42,7 @@ class AuthService extends ChangeNotifier {
         password: password,
       );
 
-      _getUser();
+      await _getUser();
 
       if (_auth.currentUser != null) {
         DatabaseReference reference = FirebaseDatabase.instance.ref().child(
@@ -73,10 +73,16 @@ class AuthService extends ChangeNotifier {
   Future<void> login(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      _getUser();
+      await _getUser();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+      if (e.code == 'invalid-credential') {
         throw AuthException('Verifique suas credenciais!');
+      } else if (e.code == 'too-many-requests') {
+        throw AuthException(
+          'Todas as solicitações deste dispositivo foram bloqueadas devido a atividades incomuns! Por favor, tente novamente mais tarde.',
+        );
+      } else {
+        throw AuthException('Erro incomum!');
       }
     }
   }
@@ -84,7 +90,7 @@ class AuthService extends ChangeNotifier {
   Future<void> logout() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.remove('patientID');
+    await prefs.remove('patientId');
     await prefs.remove('email');
     await prefs.remove('pass');
 

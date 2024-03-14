@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutriped/app/ui/theme/design_system.dart';
 
 class CustomSnackBar {
   final BuildContext context;
@@ -16,7 +17,7 @@ class CustomSnackBar {
       SnackBar(
         duration: const Duration(seconds: 5),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-        backgroundColor: const Color(0xFF2F4858),
+        backgroundColor: NutripedColors.primary4,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         content: Text(
