@@ -15,8 +15,10 @@ class LinkPage extends StatefulWidget {
 
 class _LinkPageState extends State<LinkPage> {
   TextEditingController name = TextEditingController();
+  TextEditingController birthday = TextEditingController();
   TextEditingController linkID =
       TextEditingController(text: '5ue0Ewvg8nhdD1FDUzwyf6VJx693');
+  DateTime? selectedDate;
 
   final LinkController _controller = LinkController();
 
@@ -64,6 +66,32 @@ class _LinkPageState extends State<LinkPage> {
                   ),
                   const Divider(height: 2.0, thickness: 1.0),
                   CupertinoTextFormFieldRow(
+                    controller: birthday,
+                    prefix: const Text(
+                      'Data de Nascimento',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      final datePick = await showDatePicker(
+                        context: context,
+                        initialDate: selectedDate ?? DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+      
+                      if (datePick != null) {
+                        selectedDate = datePick;
+                        String day = datePick.day.toString().padLeft(2, '0');
+                        String month =
+                            datePick.month.toString().padLeft(2, '0');
+                        String year = datePick.year.toString();
+                        birthday.text = "$day/$month/$year";
+                      }
+                    },
+                  ),
+                  const Divider(height: 2.0, thickness: 1.0),
+                  CupertinoTextFormFieldRow(
                     controller: linkID,
                     prefix: const Text(
                       'Link',
@@ -83,25 +111,32 @@ class _LinkPageState extends State<LinkPage> {
                     text: 'Vincular',
                     isLoading: _controller.isLoading,
                     onPressed: () async {
-                      await _controller
-                          .linkPatient(
-                        name: name.text,
-                        link: linkID.text,
-                      )
-                          .then(
-                        (value) {
-                          if (value.$1) {
-                            GoRouter.of(context).pushReplacementNamed(
-                              '/patient',
-                            );
-                            CustomSnackBar(context).show(
-                              message: 'Vinculação finalizada com sucesso!',
-                            );
-                          } else {
-                            CustomSnackBar(context).show(message: value.$2!);
-                          }
-                        },
-                      );
+                      if (name.text.length > 8 && birthday.text.isNotEmpty) {
+                        await _controller
+                            .linkPatient(
+                          name: name.text,
+                          link: linkID.text,
+                        )
+                            .then(
+                          (value) {
+                            if (value.$1) {
+                              GoRouter.of(context).pushReplacementNamed(
+                                '/patient',
+                              );
+                              CustomSnackBar(context).show(
+                                message: 'Vinculação finalizada com sucesso!',
+                              );
+                            } else {
+                              CustomSnackBar(context).show(message: value.$2!);
+                            }
+                          },
+                        );
+                      } else {
+                        CustomSnackBar(context).show(
+                          message:
+                              'Por favor, verifique suas informações pessoais e garanta que seu nome completo e data de nascimento estejam corretamente inseridos, pois são obrigatórios.',
+                        );
+                      }
                     },
                   );
                 },

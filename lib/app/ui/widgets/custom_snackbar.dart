@@ -14,7 +14,7 @@ class CustomSnackBar {
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(seconds: 2),
+        duration: const Duration(seconds: 5),
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         backgroundColor: const Color(0xFF2F4858),
         behavior: SnackBarBehavior.floating,

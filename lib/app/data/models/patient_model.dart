@@ -1,18 +1,18 @@
 class PatientModel {
   final String id;
-  final String email;
   final String name;
-  final String relationship;
+  final String birthday;
+  final List? meals;
 
   PatientModel({
     required this.id,
-    required this.email,
     required this.name,
-    required this.relationship,
+    required this.birthday,
+    this.meals,
   });
 
   @override
   String toString() {
-    return 'PatientModel{id: $id, email: $email, nome: $name, parentesco $relationship}';
+    return 'PatientModel{id: $id, nome: $name, nascimento: $birthday, meals: $meals}';
   }
 }
