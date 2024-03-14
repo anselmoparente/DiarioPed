@@ -11,81 +11,94 @@ class IntroductionPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: NutripedColors.backgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: size.width * 0.95,
-              decoration: BoxDecoration(
-                color: NutripedColors.button.withOpacity(0.8),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-              ),
-              padding: const EdgeInsets.all(16.0),
-              child: const Text(
-                textAlign: TextAlign.start,
-                'Bem vindo ao Nutriped!\n\nEste diário alimentar tem como objetivo identificar os alimentos que podem estar causando desequilíbrio na cavidade bucal e consequentemente a cárie.\nVocê, mãe/pai (ou outra pessoa responsável), deverá registrar quais os alimentos e a quantidade que seu/sua filho(a) consome durante 3 ou 7 dias, para que o odontopediatra possa identificar quais deles podem contribuir  para o desequilíbrio no meio bucal.\nImportante que todos os alimentos sejam anotados nos horários que são ingeridos.',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            SizedBox(
-              width: size.width * 0.8,
-              height: size.width * 0.8,
-              child: Transform.translate(
-                offset: const Offset(0, -2),
-                child: SvgPicture.asset(
-                  'assets/images/introduction.svg',
-                  fit: BoxFit.fill,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: size.width * 0.95,
+                      decoration: BoxDecoration(
+                        color: NutripedColors.button.withOpacity(0.8),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
+                      ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: const Text(
+                        textAlign: TextAlign.start,
+                        'Bem vindo ao Nutriped!\n\nEste diário alimentar tem como objetivo identificar os alimentos que podem estar causando desequilíbrio na cavidade bucal e consequentemente a cárie.\nVocê, mãe/pai (ou outra pessoa responsável), deverá registrar quais os alimentos e a quantidade que seu/sua filho(a) consome durante 3 ou 7 dias, para que o odontopediatra possa identificar quais deles podem contribuir  para o desequilíbrio no meio bucal.\nImportante que todos os alimentos sejam anotados nos horários que são ingeridos.',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.8,
+                      height: size.width * 0.8,
+                      child: Transform.translate(
+                        offset: const Offset(0, -2),
+                        child: SvgPicture.asset(
+                          'assets/images/introduction.svg',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            SizedBox(
-              width: size.width * 0.95,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 16.0,
+                SizedBox(
+                  width: size.width * 0.95,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 16.0,
+                          ),
+                          backgroundColor:
+                              NutripedColors.button.withOpacity(0.8),
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                        onPressed: () => GoRouter.of(context).pop(),
+                        child: const Icon(
+                          Icons.arrow_back_ios_rounded,
+                          color: Colors.white,
+                        ),
                       ),
-                      backgroundColor: NutripedColors.button.withOpacity(0.8),
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0),
+                      const SizedBox(height: 16.0),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0,
+                            vertical: 16.0,
+                          ),
+                          backgroundColor:
+                              NutripedColors.button.withOpacity(0.8),
+                          elevation: 2.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
+                        onPressed: () =>
+                            GoRouter.of(context).pushNamed('/link'),
+                        child: const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    onPressed: () => GoRouter.of(context).pop(),
-                    child: const Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: Colors.white,
-                    ),
+                    ],
                   ),
-                  const SizedBox(height: 16.0),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 16.0,
-                      ),
-                      backgroundColor: NutripedColors.button.withOpacity(0.8),
-                      elevation: 2.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                    ),
-                    onPressed: () => GoRouter.of(context).pushNamed('/link'),
-                    child: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
