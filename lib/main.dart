@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:nutriped/app/ui/pages/add_meal.dart';
 import 'package:nutriped/app/ui/pages/home_page.dart';
 import 'package:nutriped/app/ui/pages/introduction_page.dart';
 import 'package:nutriped/app/ui/pages/link_page.dart';
@@ -31,6 +32,11 @@ final GoRouter _router = GoRouter(
           path: 'access',
           name: '/access',
           builder: (context, state) => const AccessPage(),
+        ),
+        GoRoute(
+          path: 'add_meal',
+          name: '/add_meal',
+          builder: (context, state) => const AddMeal(),
         ),
         GoRoute(
           path: 'home',
