@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
@@ -167,9 +166,9 @@ class _AddMealState extends State<AddMeal> {
                                   controller: meal,
                                   label: 'Pesquisar',
                                   noHaveLabel: true,
-                                  onChanged: (String text) => setState(() {
-                                    search(text);
-                                  }),
+                                  onChanged: (String text) => setState(
+                                    () => search(text),
+                                  ),
                                 ),
                               ),
                             ),
@@ -179,7 +178,10 @@ class _AddMealState extends State<AddMeal> {
                                 color: Colors.grey,
                                 size: 32.0,
                               ),
-                              onPressed: () => meal.clear(),
+                              onPressed: () {
+                                meal.clear();
+                                search('');
+                              },
                             ),
                           ],
                         ),
