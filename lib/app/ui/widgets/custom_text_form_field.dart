@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
+  final bool? noHaveLabel;
   final bool? obscureText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
@@ -13,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     required this.controller,
     required this.label,
+    this.noHaveLabel,
     this.obscureText,
     this.prefixIcon,
     this.suffixIcon,
@@ -31,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         border: InputBorder.none,
-        label: Text(label),
+        label: noHaveLabel == true ? null : Text(label),
         hintText: label,
         hintStyle: const TextStyle(
           fontSize: 17,

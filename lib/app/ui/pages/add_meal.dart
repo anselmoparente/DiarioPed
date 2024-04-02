@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
@@ -17,6 +17,7 @@ class _AddMealState extends State<AddMeal> {
   int? groupValue = 0;
   int? selectedIndex;
 
+  List<String> aux = [];
   List<String> foods = [
     'Café com leite',
     'Leite puro',
@@ -89,6 +90,10 @@ class _AddMealState extends State<AddMeal> {
     'Caruru',
   ];
 
+  void search(String search) {
+    aux = foods.where((element) => element.contains(search)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -148,17 +153,45 @@ class _AddMealState extends State<AddMeal> {
                     ),
                     child: Column(
                       children: [
-                        CustomTextFormField(
-                          controller: meal,
-                          label: 'Alimento',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: size.width * 0.7,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  color: Colors.black.withOpacity(0.05),
+                                ),
+                                child: CustomTextFormField(
+                                  controller: meal,
+                                  label: 'Pesquisar',
+                                  noHaveLabel: true,
+                                  onChanged: (String text) => setState(() {
+                                    search(text);
+                                  }),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Icons.cancel,
+                                color: Colors.grey,
+                                size: 32.0,
+                              ),
+                              onPressed: () => meal.clear(),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 8.0),
                         SizedBox(
                           height: size.height * 0.06,
                           width: size.width - 16.0,
                           child: ListView.builder(
                             padding: const EdgeInsets.all(4.0),
                             scrollDirection: Axis.horizontal,
-                            itemCount: foods.length,
+                            itemCount:
+                                meal.text.isEmpty ? foods.length : aux.length,
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 child: Container(
@@ -181,7 +214,9 @@ class _AddMealState extends State<AddMeal> {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          foods[index],
+                                          meal.text.isEmpty
+                                              ? foods[index]
+                                              : aux[index],
                                           style: TextStyle(
                                             color: selectedIndex == index
                                                 ? Colors.white
@@ -193,9 +228,7 @@ class _AddMealState extends State<AddMeal> {
                                   ),
                                 ),
                                 onTap: () => setState(
-                                  () {
-                                    selectedIndex = index;
-                                  },
+                                  () => selectedIndex = index,
                                 ),
                               );
                             },
