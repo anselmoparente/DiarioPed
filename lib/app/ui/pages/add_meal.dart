@@ -156,6 +156,7 @@ class _AddMealState extends State<AddMeal> {
                           height: size.height * 0.06,
                           width: size.width - 16.0,
                           child: ListView.builder(
+                            padding: const EdgeInsets.all(4.0),
                             scrollDirection: Axis.horizontal,
                             itemCount: foods.length,
                             itemBuilder: (context, index) {
