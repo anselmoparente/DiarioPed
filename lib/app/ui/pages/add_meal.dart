@@ -14,7 +14,7 @@ class _AddMealState extends State<AddMeal> {
   TextEditingController meal = TextEditingController();
 
   int? groupValue = 0;
-  int? selectedIndex;
+  String? selectedFood;
 
   List<String> aux = [];
   List<String> foods = [
@@ -178,10 +178,10 @@ class _AddMealState extends State<AddMeal> {
                                 color: Colors.grey,
                                 size: 32.0,
                               ),
-                              onPressed: () {
+                              onPressed: () => setState(() {
                                 meal.clear();
                                 search('');
-                              },
+                              }),
                             ),
                           ],
                         ),
@@ -208,9 +208,13 @@ class _AddMealState extends State<AddMeal> {
                                         horizontal: 8.0,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: selectedIndex == index
-                                            ? NutripedColors.button
-                                            : Colors.yellow,
+                                        color: (meal.text.isEmpty)
+                                            ? foods[index] == selectedFood
+                                                ? NutripedColors.button
+                                                : Colors.yellow
+                                            : aux[index] == selectedFood
+                                                ? NutripedColors.button
+                                                : Colors.yellow,
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
@@ -220,9 +224,13 @@ class _AddMealState extends State<AddMeal> {
                                               ? foods[index]
                                               : aux[index],
                                           style: TextStyle(
-                                            color: selectedIndex == index
-                                                ? Colors.white
-                                                : Colors.black,
+                                            color: (meal.text.isEmpty)
+                                                ? foods[index] == selectedFood
+                                                    ? Colors.white
+                                                    : Colors.black
+                                                : aux[index] == selectedFood
+                                                    ? Colors.white
+                                                    : Colors.black,
                                           ),
                                         ),
                                       ),
@@ -230,7 +238,9 @@ class _AddMealState extends State<AddMeal> {
                                   ),
                                 ),
                                 onTap: () => setState(
-                                  () => selectedIndex = index,
+                                  () => meal.text.isEmpty
+                                      ? selectedFood = foods[index]
+                                      : selectedFood = aux[index],
                                 ),
                               );
                             },
