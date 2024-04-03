@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
+import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
 
 class AddMeal extends StatefulWidget {
@@ -89,6 +90,8 @@ class _AddMealState extends State<AddMeal> {
     'Caruru',
   ];
 
+  List<String> meals = ['Arroz'];
+
   void search(String search) {
     aux = foods.where((element) => element.contains(search)).toList();
   }
@@ -126,9 +129,19 @@ class _AddMealState extends State<AddMeal> {
                   child: Container(
                     height: size.height * 0.4,
                     width: size.width * 0.9,
+                    padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: ListView.builder(
+                      itemCount: meals.length,
+                      itemBuilder: (context, index) {
+                        return Text(
+                          meals[index],
+                          style: const TextStyle(fontSize: 16.0),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -245,7 +258,25 @@ class _AddMealState extends State<AddMeal> {
                               );
                             },
                           ),
-                        )
+                        ),
+                        const SizedBox(height: 8.0),
+                        SizedBox(
+                          width: size.width * 0.6,
+                          child: CustomButton(
+                            backgroundColor: NutripedColors.button,
+                            text: 'Adicionar alimento',
+                            onPressed: () {
+                              if (selectedFood != null) {
+                                if (!meals.contains(selectedFood)) {
+                                  meals.add(selectedFood!);
+                                  selectedFood = null;
+                                } else {
+                                  CustomSnackBar(context).show(message: 'Você já adicionou esse alimento!');
+                                }
+                              }
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
