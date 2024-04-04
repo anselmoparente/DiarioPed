@@ -127,21 +127,38 @@ class _AddMealState extends State<AddMeal> {
                   elevation: 3.0,
                   borderRadius: BorderRadius.circular(16.0),
                   child: Container(
-                    height: size.height * 0.4,
+                    height: size.height * 0.35,
                     width: size.width * 0.9,
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
-                    child: ListView.builder(
+                    child: ListView.separated(
                       itemCount: meals.length,
                       itemBuilder: (context, index) {
-                        return Text(
-                          meals[index],
-                          style: const TextStyle(fontSize: 16.0),
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              meals[index],
+                              style: const TextStyle(fontSize: 16.0),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              color: Colors.red,
+                              onPressed: () => setState(
+                                () => meals.removeAt(index),
+                              ),
+                            ),
+                          ],
                         );
                       },
+                      separatorBuilder: (context, index) {
+                        return const Divider(
+                          color: Colors.grey,
+                        );
+                      },  
                     ),
                   ),
                 ),
@@ -152,149 +169,151 @@ class _AddMealState extends State<AddMeal> {
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0),
                   ),
-                  child: Container(
-                    height: size.height * 0.4,
-                    width: size.width * 0.9,
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16.0),
-                        topRight: Radius.circular(16.0),
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: size.width * 0.7,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  color: Colors.black.withOpacity(0.05),
-                                ),
-                                child: CustomTextFormField(
-                                  controller: meal,
-                                  label: 'Pesquisar',
-                                  noHaveLabel: true,
-                                  onChanged: (String text) => setState(
-                                    () => search(text),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.cancel,
-                                color: Colors.grey,
-                                size: 32.0,
-                              ),
-                              onPressed: () => setState(() {
-                                meal.clear();
-                                search('');
-                              }),
-                            ),
-                          ],
+                  child: IntrinsicHeight(
+                    child: Container(
+                      width: size.width * 0.9,
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.0),
+                          topRight: Radius.circular(16.0),
                         ),
-                        const SizedBox(height: 8.0),
-                        SizedBox(
-                          height: size.height * 0.06,
-                          width: size.width - 16.0,
-                          child: ListView.builder(
-                            padding: const EdgeInsets.all(4.0),
-                            scrollDirection: Axis.horizontal,
-                            itemCount:
-                                meal.text.isEmpty ? foods.length : aux.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: size.width * 0.7,
                                 child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: index != 0 ? 8.0 : 0.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    color: Colors.black.withOpacity(0.05),
                                   ),
-                                  child: Material(
-                                    elevation: 1.0,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: (meal.text.isEmpty)
-                                            ? foods[index] == selectedFood
-                                                ? NutripedColors.button
-                                                : Colors.yellow
-                                            : aux[index] == selectedFood
-                                                ? NutripedColors.button
-                                                : Colors.yellow,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          meal.text.isEmpty
-                                              ? foods[index]
-                                              : aux[index],
-                                          style: TextStyle(
-                                            color: (meal.text.isEmpty)
-                                                ? foods[index] == selectedFood
-                                                    ? Colors.white
-                                                    : Colors.black
-                                                : aux[index] == selectedFood
-                                                    ? Colors.white
-                                                    : Colors.black,
+                                  child: CustomTextFormField(
+                                    controller: meal,
+                                    label: 'Pesquisar',
+                                    noHaveLabel: true,
+                                    onChanged: (String text) => setState(
+                                      () => search(text),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.cancel,
+                                  color: Colors.grey,
+                                  size: 32.0,
+                                ),
+                                onPressed: () => setState(() {
+                                  meal.clear();
+                                  search('');
+                                }),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8.0),
+                          SizedBox(
+                            height: size.height * 0.06,
+                            width: size.width - 16.0,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.all(4.0),
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  meal.text.isEmpty ? foods.length : aux.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  child: Container(
+                                    margin: EdgeInsets.only(
+                                      left: index != 0 ? 8.0 : 0.0,
+                                    ),
+                                    child: Material(
+                                      elevation: 1.0,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: (meal.text.isEmpty)
+                                              ? foods[index] == selectedFood
+                                                  ? NutripedColors.button
+                                                  : Colors.yellow
+                                              : aux[index] == selectedFood
+                                                  ? NutripedColors.button
+                                                  : Colors.yellow,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            meal.text.isEmpty
+                                                ? foods[index]
+                                                : aux[index],
+                                            style: TextStyle(
+                                              color: (meal.text.isEmpty)
+                                                  ? foods[index] == selectedFood
+                                                      ? Colors.white
+                                                      : Colors.black
+                                                  : aux[index] == selectedFood
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                onTap: () => setState(
-                                  () => meal.text.isEmpty
-                                      ? selectedFood = foods[index]
-                                      : selectedFood = aux[index],
-                                ),
-                              );
-                            },
+                                  onTap: () => setState(
+                                    () => meal.text.isEmpty
+                                        ? selectedFood = foods[index]
+                                        : selectedFood = aux[index],
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8.0),
-                        SizedBox(
-                          width: size.width * 0.7,
-                          child: CustomButton(
-                            backgroundColor: NutripedColors.primary1,
-                            text: 'Adicionar alimento',
-                            onPressed: () {
-                              if (selectedFood != null) {
-                                if (!meals.contains(selectedFood)) {
-                                  setState(() {
-                                    meals.add(selectedFood!);
-                                    meal.clear();
-                                    search('');
-                                    selectedFood = null;
-                                  });
-                                } else {
-                                  CustomSnackBar(context).show(
-                                    message: 'Você já adicionou esse alimento!',
-                                  );
+                          const SizedBox(height: 8.0),
+                          SizedBox(
+                            width: size.width * 0.7,
+                            child: CustomButton(
+                              backgroundColor: NutripedColors.primary1,
+                              text: 'Adicionar alimento',
+                              onPressed: () {
+                                if (selectedFood != null) {
+                                  if (!meals.contains(selectedFood)) {
+                                    setState(() {
+                                      meals.add(selectedFood!);
+                                      meal.clear();
+                                      search('');
+                                      selectedFood = null;
+                                    });
+                                  } else {
+                                    CustomSnackBar(context).show(
+                                      message:
+                                          'Você já adicionou esse alimento!',
+                                    );
+                                  }
                                 }
-                              }
-                            },
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8.0),
-                        SizedBox(
-                          width: size.width * 0.7,
-                          child: CustomButton(
-                            backgroundColor: Colors.white,
-                            borderColor: NutripedColors.primary1,
-                            textColor: NutripedColors.primary1,
-                            text: 'Adicionar manualmente',
-                            onPressed: () {},
+                          const SizedBox(height: 8.0),
+                          SizedBox(
+                            width: size.width * 0.7,
+                            child: CustomButton(
+                              backgroundColor: Colors.white,
+                              borderColor: NutripedColors.primary1,
+                              textColor: NutripedColors.primary1,
+                              text: 'Adicionar manualmente',
+                              onPressed: () {},
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
