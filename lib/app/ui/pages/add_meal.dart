@@ -261,20 +261,37 @@ class _AddMealState extends State<AddMeal> {
                         ),
                         const SizedBox(height: 8.0),
                         SizedBox(
-                          width: size.width * 0.6,
+                          width: size.width * 0.7,
                           child: CustomButton(
-                            backgroundColor: NutripedColors.button,
+                            backgroundColor: NutripedColors.primary1,
                             text: 'Adicionar alimento',
                             onPressed: () {
                               if (selectedFood != null) {
                                 if (!meals.contains(selectedFood)) {
-                                  meals.add(selectedFood!);
-                                  selectedFood = null;
+                                  setState(() {
+                                    meals.add(selectedFood!);
+                                    meal.clear();
+                                    search('');
+                                    selectedFood = null;
+                                  });
                                 } else {
-                                  CustomSnackBar(context).show(message: 'Você já adicionou esse alimento!');
+                                  CustomSnackBar(context).show(
+                                    message: 'Você já adicionou esse alimento!',
+                                  );
                                 }
                               }
                             },
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        SizedBox(
+                          width: size.width * 0.7,
+                          child: CustomButton(
+                            backgroundColor: Colors.white,
+                            borderColor: NutripedColors.primary1,
+                            textColor: NutripedColors.primary1,
+                            text: 'Adicionar manualmente',
+                            onPressed: () {},
                           ),
                         ),
                       ],

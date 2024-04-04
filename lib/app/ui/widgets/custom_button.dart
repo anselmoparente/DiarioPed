@@ -7,6 +7,8 @@ class CustomButton extends StatelessWidget {
   final IconData? prefixIcon;
   final bool? isLoading;
   final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? textColor;
 
   const CustomButton({
     required this.onPressed,
@@ -14,6 +16,8 @@ class CustomButton extends StatelessWidget {
     this.prefixIcon,
     this.isLoading,
     this.backgroundColor,
+    this.borderColor,
+    this.textColor,
     super.key,
   });
 
@@ -26,6 +30,9 @@ class CustomButton extends StatelessWidget {
           backgroundColor: backgroundColor ?? NutripedColors.button,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
+            side: borderColor != null
+                ? BorderSide(width: 2.0, color: borderColor!)
+                : BorderSide.none,
           ),
         ),
         onPressed: onPressed,
@@ -54,8 +61,10 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Text(
                       text,
-                      style:
-                          const TextStyle(color: Colors.white, fontSize: 18.0),
+                      style: TextStyle(
+                        color: textColor ?? Colors.white,
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
           ],
