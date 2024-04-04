@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutriped/app/data/constants.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
@@ -14,83 +15,13 @@ class AddMeal extends StatefulWidget {
 class _AddMealState extends State<AddMeal> {
   TextEditingController meal = TextEditingController();
 
-  int? groupValue = 0;
   String? selectedFood;
+  SugarType? sugarType;
+  Filling? fillingType;
+  Diet? dietType;
 
   List<String> aux = [];
-  List<String> foods = [
-    'Café com leite',
-    'Leite puro',
-    'Achocolatado',
-    'Pão salgado',
-    'Pão doce',
-    'Pão com manteiga',
-    'Ovo frito',
-    'Ovo cozido',
-    'Biscoito doce',
-    'Biscoito salgado',
-    'Biscoito recheado',
-    'Cereais',
-    'Queijo',
-    'Mortadela',
-    'Cuscuz',
-    'Beiju/Tapioca',
-    'Batata doce',
-    'Aipim/Macaxeira',
-    'Geleia',
-    'Bolo',
-    'Bolo com cobertura',
-    'Banana da terra cozida',
-    'Banana da terra frita',
-    'Suco da fruta natural',
-    'Suco industrializado',
-    'Feijão de caldo',
-    'Feijão tropeiro',
-    'Farinha',
-    'Arroz',
-    'Arroz integral',
-    'Macarrão',
-    'Macarrão integral',
-    'Catchup',
-    'Batata cozida',
-    'Batata frita',
-    'Purê de batata',
-    'Carna bovina',
-    'Carna bovina',
-    'Frango',
-    'Peixe',
-    'Verduras/legumes',
-    'Doce de sobremesa',
-    'Fruta de sobremesa',
-    'Sorvete',
-    'Picolé',
-    'Calabresa',
-    'Sanduíche',
-    'Hambúrguer',
-    'Cachorro-quente',
-    'Requeijão cremoso',
-    'Queijo coalho',
-    'Iogurte',
-    'Lasanha',
-    'Queijo tipo Ricota',
-    'Torta doce',
-    'Torta salgada',
-    'Pizza salgada',
-    'Pizza doce',
-    'Fruta',
-    'Salgadinho',
-    'Bacon',
-    'Mousse',
-    'Pipoca doce',
-    'Pipoca salgada',
-    'Milho',
-    'Pamonha',
-    'Acarajé',
-    'Vatapá',
-    'Caruru',
-  ];
-
-  List<String> meals = ['Arroz'];
+  List<String> meals = [];
 
   void search(String search) {
     aux = foods.where((element) => element.contains(search)).toList();
@@ -158,7 +89,7 @@ class _AddMealState extends State<AddMeal> {
                         return const Divider(
                           color: Colors.grey,
                         );
-                      },  
+                      },
                     ),
                   ),
                 ),
@@ -215,7 +146,7 @@ class _AddMealState extends State<AddMeal> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8.0),
+                          const SizedBox(height: 16.0),
                           SizedBox(
                             height: size.height * 0.06,
                             width: size.width - 16.0,
@@ -276,7 +207,67 @@ class _AddMealState extends State<AddMeal> {
                               },
                             ),
                           ),
-                          const SizedBox(height: 8.0),
+                          Visibility(
+                            visible: sugar.contains(selectedFood),
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 16.0),
+                              child: IntrinsicHeight(
+                                child: Column(
+                                  children: SugarType.values.map((type) {
+                                    return RadioListTile<SugarType>(
+                                      title: Text(type.value),
+                                      value: type,
+                                      groupValue: sugarType,
+                                      onChanged: (value) => setState(
+                                        () => sugarType = value,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: filling.contains(selectedFood),
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 16.0),
+                              child: IntrinsicHeight(
+                                child: Column(
+                                  children: Filling.values.map((type) {
+                                    return RadioListTile<Filling>(
+                                      title: Text(type.value),
+                                      value: type,
+                                      groupValue: fillingType,
+                                      onChanged: (value) => setState(
+                                        () => fillingType = value,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: diet.contains(selectedFood),
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 16.0),
+                              child: IntrinsicHeight(
+                                child: Column(
+                                  children: Diet.values.map((type) {
+                                    return RadioListTile<Diet>(
+                                      title: Text(type.value),
+                                      value: type,
+                                      groupValue: dietType,
+                                      onChanged: (value) => setState(
+                                        () => dietType = value,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16.0),
                           SizedBox(
                             width: size.width * 0.7,
                             child: CustomButton(
