@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/constants.dart';
+import 'package:nutriped/app/data/controller/patient_controller.dart';
+import 'package:nutriped/app/data/models/food_model.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
@@ -13,6 +15,7 @@ class AddMeal extends StatefulWidget {
 }
 
 class _AddMealState extends State<AddMeal> {
+  PatientController controller = PatientController();
   TextEditingController meal = TextEditingController();
 
   String? selectedFood;
@@ -21,7 +24,6 @@ class _AddMealState extends State<AddMeal> {
   Diet? dietType;
 
   List<String> aux = [];
-  List<String> meals = [];
 
   void search(String search) {
     aux = foods.where((element) => element.contains(search)).toList();
@@ -66,20 +68,20 @@ class _AddMealState extends State<AddMeal> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: ListView.separated(
-                      itemCount: meals.length,
+                      itemCount: controller.meals.length,
                       itemBuilder: (context, index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              meals[index],
+                              controller.meals[index].name,
                               style: const TextStyle(fontSize: 16.0),
                             ),
                             IconButton(
                               icon: const Icon(Icons.delete),
                               color: Colors.red,
                               onPressed: () => setState(
-                                () => meals.removeAt(index),
+                                () => controller.meals.removeAt(index),
                               ),
                             ),
                           ],
@@ -198,11 +200,23 @@ class _AddMealState extends State<AddMeal> {
                                       ),
                                     ),
                                   ),
-                                  onTap: () => setState(
-                                    () => meal.text.isEmpty
-                                        ? selectedFood = foods[index]
-                                        : selectedFood = aux[index],
-                                  ),
+                                  onTap: () => setState(() {
+                                    if (meal.text.isEmpty) {
+                                      if (selectedFood != foods[index]) {
+                                        selectedFood = foods[index];
+                                        sugarType = null;
+                                        fillingType = null;
+                                        dietType = null;
+                                      }
+                                    } else {
+                                      if (selectedFood != aux[index]) {
+                                        selectedFood = aux[index];
+                                        sugarType = null;
+                                        fillingType = null;
+                                        dietType = null;
+                                      }
+                                    }
+                                  }),
                                 );
                               },
                             ),
@@ -275,9 +289,17 @@ class _AddMealState extends State<AddMeal> {
                               text: 'Adicionar alimento',
                               onPressed: () {
                                 if (selectedFood != null) {
-                                  if (!meals.contains(selectedFood)) {
+                                  if (!controller.meals
+                                      .contains(selectedFood)) {
                                     setState(() {
-                                      meals.add(selectedFood!);
+                                      controller.meals.add(
+                                        FoodModel(
+                                          name: selectedFood!,
+                                          sugarType: sugarType,
+                                          fillingType: fillingType,
+                                          dietType: dietType,
+                                        ),
+                                      );
                                       meal.clear();
                                       search('');
                                       selectedFood = null;
