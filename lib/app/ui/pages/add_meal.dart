@@ -26,7 +26,9 @@ class _AddMealState extends State<AddMeal> {
   List<String> aux = [];
 
   void search(String search) {
-    aux = foods.where((element) => element.toLowerCase().contains(search)).toList();
+    aux = foods
+        .where((element) => element.toLowerCase().contains(search))
+        .toList();
   }
 
   @override
@@ -168,20 +170,14 @@ class _AddMealState extends State<AddMeal> {
                 const SizedBox(height: 20.0),
                 Material(
                   elevation: 3.0,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16.0),
-                    topRight: Radius.circular(16.0),
-                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   child: IntrinsicHeight(
                     child: Container(
                       width: size.width * 0.9,
                       padding: const EdgeInsets.all(8.0),
                       decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16.0),
-                          topRight: Radius.circular(16.0),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
                       ),
                       child: Column(
                         children: [
