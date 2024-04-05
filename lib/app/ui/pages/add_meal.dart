@@ -6,6 +6,7 @@ import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
+import 'dart:developer';
 
 class AddMeal extends StatefulWidget {
   const AddMeal({super.key});
@@ -336,7 +337,9 @@ class _AddMealState extends State<AddMeal> {
                   child: CustomButton(
                     backgroundColor: NutripedColors.button,
                     text: 'Finalizar refeição',
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.showDateTimePicker(context: context).then((value) => log(value.toString()));
+                    },
                   ),
                 ),
                 const SizedBox(height: 20.0),
