@@ -26,7 +26,7 @@ class _AddMealState extends State<AddMeal> {
   List<String> aux = [];
 
   void search(String search) {
-    aux = foods.where((element) => element.contains(search)).toList();
+    aux = foods.where((element) => element.toLowerCase().contains(search)).toList();
   }
 
   @override
