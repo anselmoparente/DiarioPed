@@ -28,7 +28,7 @@ class PatientController {
     );
 
     return selectedTime == null
-        ? selectedDate
+        ? null
         : DateTime(
             selectedDate.year,
             selectedDate.month,
