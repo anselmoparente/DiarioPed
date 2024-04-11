@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/constants.dart';
 import 'package:nutriped/app/data/controller/patient_controller.dart';
 import 'package:nutriped/app/data/models/food_model.dart';
@@ -403,7 +404,44 @@ class _AddMealState extends State<AddMeal> {
                     backgroundColor: NutripedColors.button,
                     text: 'Finalizar refeição',
                     onPressed: () async {
-                      await controller.showDateTimePicker(context: context);
+                      if (controller.meals.isEmpty) {
+                        CustomSnackBar(context).show(
+                          message: 'Inclua os alimentos que foram consumidos.',
+                        );
+                      } else {
+                        await controller
+                            .showDateTimePicker(context: context)
+                            .then(
+                          (value) async {
+                            if (value != null) {
+                              await controller
+                                  .sendMeal(
+                                time: value,
+                              )
+                                  .then(
+                                (value) {
+                                  if (value) {
+                                    CustomSnackBar(context).show(
+                                      message:
+                                          'Refeição adicionada com sucesso!',
+                                    );
+                                    GoRouter.of(context).pop();
+                                  } else {
+                                    CustomSnackBar(context).show(
+                                      message: 'Falha ao adicionar refeição!',
+                                    );
+                                  }
+                                },
+                              );
+                            } else {
+                              CustomSnackBar(context).show(
+                                message:
+                                    'Por favor, insira um horário válido para indicar quando o alimento foi consumido.',
+                              );
+                            }
+                          },
+                        );
+                      }
                     },
                   ),
                 ),
