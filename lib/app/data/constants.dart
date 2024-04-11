@@ -42,7 +42,7 @@ List<String> diet = [
   'Picolé',
 ];
 
-List<String> foods = [
+List<String> foodsList = [
   'Café com leite',
   'Leite puro',
   'Achocolatado',

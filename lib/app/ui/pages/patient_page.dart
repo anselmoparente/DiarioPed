@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/controller/patient_controller.dart';
 
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
@@ -13,6 +14,8 @@ class PatientPage extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPage> {
+  PatientController controller = PatientController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

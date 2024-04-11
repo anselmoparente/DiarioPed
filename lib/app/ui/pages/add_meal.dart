@@ -27,7 +27,7 @@ class _AddMealState extends State<AddMeal> {
   List<String> aux = [];
 
   void search(String search) {
-    aux = foods
+    aux = foodsList
         .where((element) => element.toLowerCase().contains(search))
         .toList();
   }
@@ -221,7 +221,7 @@ class _AddMealState extends State<AddMeal> {
                               padding: const EdgeInsets.all(4.0),
                               scrollDirection: Axis.horizontal,
                               itemCount:
-                                  meal.text.isEmpty ? foods.length : aux.length,
+                                  meal.text.isEmpty ? foodsList.length : aux.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   child: Container(
@@ -237,7 +237,7 @@ class _AddMealState extends State<AddMeal> {
                                         ),
                                         decoration: BoxDecoration(
                                           color: (meal.text.isEmpty)
-                                              ? foods[index] == selectedFood
+                                              ? foodsList[index] == selectedFood
                                                   ? NutripedColors.button
                                                   : Colors.yellow
                                               : aux[index] == selectedFood
@@ -249,11 +249,11 @@ class _AddMealState extends State<AddMeal> {
                                         child: Center(
                                           child: Text(
                                             meal.text.isEmpty
-                                                ? foods[index]
+                                                ? foodsList[index]
                                                 : aux[index],
                                             style: TextStyle(
                                               color: (meal.text.isEmpty)
-                                                  ? foods[index] == selectedFood
+                                                  ? foodsList[index] == selectedFood
                                                       ? Colors.white
                                                       : Colors.black
                                                   : aux[index] == selectedFood
@@ -267,8 +267,8 @@ class _AddMealState extends State<AddMeal> {
                                   ),
                                   onTap: () => setState(() {
                                     if (meal.text.isEmpty) {
-                                      if (selectedFood != foods[index]) {
-                                        selectedFood = foods[index];
+                                      if (selectedFood != foodsList[index]) {
+                                        selectedFood = foodsList[index];
                                         sugarType = null;
                                         fillingType = null;
                                         dietType = null;
