@@ -71,7 +71,7 @@ class _AddMealState extends State<AddMeal> {
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: ListView.separated(
-                      itemCount: controller.meals.length,
+                      itemCount: controller.meal.length,
                       itemBuilder: (context, index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,22 +81,21 @@ class _AddMealState extends State<AddMeal> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    controller.meals[index].name,
+                                    controller.meal[index].name,
                                     style: const TextStyle(fontSize: 16.0),
                                   ),
                                   Visibility(
                                     maintainSize: false,
-                                    visible:
-                                        controller.meals[index].sugarType !=
-                                            null,
-                                    child: controller.meals[index].sugarType !=
+                                    visible: controller.meal[index].sugarType !=
+                                        null,
+                                    child: controller.meal[index].sugarType !=
                                             null
                                         ? Container(
                                             padding:
                                                 const EdgeInsets.only(top: 4.0),
                                             child: Text(
-                                              controller.meals[index].sugarType!
-                                                  .value,
+                                              controller
+                                                  .meal[index].sugarType!.value,
                                               style: const TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 14.0,
@@ -108,16 +107,15 @@ class _AddMealState extends State<AddMeal> {
                                   Visibility(
                                     maintainSize: false,
                                     visible:
-                                        controller.meals[index].fillingType !=
+                                        controller.meal[index].fillingType !=
                                             null,
-                                    child: controller
-                                                .meals[index].fillingType !=
+                                    child: controller.meal[index].fillingType !=
                                             null
                                         ? Container(
                                             padding:
                                                 const EdgeInsets.only(top: 4.0),
                                             child: Text(
-                                              controller.meals[index]
+                                              controller.meal[index]
                                                   .fillingType!.value,
                                               style: const TextStyle(
                                                 color: Colors.grey,
@@ -129,16 +127,16 @@ class _AddMealState extends State<AddMeal> {
                                   ),
                                   Visibility(
                                     maintainSize: false,
-                                    visible: controller.meals[index].dietType !=
-                                        null,
-                                    child: controller.meals[index].dietType !=
+                                    visible:
+                                        controller.meal[index].dietType != null,
+                                    child: controller.meal[index].dietType !=
                                             null
                                         ? Container(
                                             padding:
                                                 const EdgeInsets.only(top: 4.0),
                                             child: Text(
                                               controller
-                                                  .meals[index].dietType!.value,
+                                                  .meal[index].dietType!.value,
                                               style: const TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 14.0,
@@ -154,7 +152,7 @@ class _AddMealState extends State<AddMeal> {
                               icon: const Icon(Icons.delete),
                               color: Colors.red,
                               onPressed: () => setState(
-                                () => controller.meals.removeAt(index),
+                                () => controller.meal.removeAt(index),
                               ),
                             ),
                           ],
@@ -356,10 +354,9 @@ class _AddMealState extends State<AddMeal> {
                               text: 'Adicionar alimento',
                               onPressed: () {
                                 if (selectedFood != null) {
-                                  if (!controller.meals
-                                      .contains(selectedFood)) {
+                                  if (!controller.meal.contains(selectedFood)) {
                                     setState(() {
-                                      controller.meals.add(
+                                      controller.meal.add(
                                         FoodModel(
                                           name: selectedFood!,
                                           sugarType: sugarType,
@@ -404,7 +401,7 @@ class _AddMealState extends State<AddMeal> {
                     backgroundColor: NutripedColors.button,
                     text: 'Finalizar refeição',
                     onPressed: () async {
-                      if (controller.meals.isEmpty) {
+                      if (controller.meal.isEmpty) {
                         CustomSnackBar(context).show(
                           message: 'Inclua os alimentos que foram consumidos.',
                         );

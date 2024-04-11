@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/models/food_model.dart';
 
 class PatientController {
-  List<FoodModel> meals = [];
+  List<FoodModel> meal = [];
 
   Future<bool> sendMeal({required DateTime time}) async {
     try {
@@ -42,7 +42,7 @@ class PatientController {
 
         Map<String, dynamic> aux = {};
 
-        for (FoodModel item in meals) {
+        for (FoodModel item in meal) {
           aux[item.name] =
               (item.sugarType ?? item.fillingType ?? item.dietType).toString();
         }
@@ -60,7 +60,7 @@ class PatientController {
       } else {
         Map<String, dynamic> map = {};
 
-        for (FoodModel item in meals) {
+        for (FoodModel item in meal) {
           map[item.name] =
               (item.sugarType ?? item.fillingType ?? item.dietType).toString();
         }
