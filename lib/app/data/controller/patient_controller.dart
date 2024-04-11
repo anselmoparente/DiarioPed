@@ -62,8 +62,9 @@ class PatientController {
         Map<String, dynamic> map = {};
 
         for (FoodModel item in meal) {
-          map[item.name] =
-              (item.sugarType ?? item.fillingType ?? item.dietType).toString();
+          map[item.name] = item.sugarType?.value ??
+              item.fillingType?.value ??
+              item.dietType?.value;
         }
 
         reference.update({
