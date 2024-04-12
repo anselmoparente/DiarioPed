@@ -6,9 +6,59 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/models/food_model.dart';
+import 'package:nutriped/app/data/models/meal_model.dart';
 
 class PatientController {
   List<FoodModel> meal = [];
+  late List<MealModel> meals;
+
+  Future<void> getMeals({String? id}) async {
+    try {
+      if (id == null) {
+        meals.clear();
+
+        String? deviceID;
+
+        DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+        if (Platform.isAndroid) {
+          var androidInfo = await deviceInfo.androidInfo;
+          deviceID = androidInfo.id;
+        }
+
+        if (Platform.isIOS) {
+          var iosInfo = await deviceInfo.iosInfo;
+          deviceID = iosInfo.identifierForVendor!;
+        }
+
+        if (deviceID != null) {
+          deviceID = deviceID.replaceAll('.', '');
+        }
+
+        final reference = FirebaseDatabase.instance.ref().child(
+              'patients/$deviceID',
+            );
+
+        final snapshot = await reference.get();
+        var data = jsonEncode(snapshot.value);
+        Map<String, dynamic> map = jsonDecode(data);
+
+        if (map['meals'].isEmpty) {
+          meals = [];
+        } else {
+          map['meals'].forEach((element) {
+            map['meals'].forEach((element) {
+              DateTime date = DateTime.parse(element['date']);
+              Map<String, dynamic> aux = element['foods'];
+              meals.add(MealModel(foods: aux, date: date));
+            });
+          });
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+      meals = [];
+    }
+  }
 
   Future<bool> sendMeal({required DateTime time}) async {
     try {
@@ -45,7 +95,8 @@ class PatientController {
         for (FoodModel item in meal) {
           aux[item.name] = item.sugarType?.value ??
               item.fillingType?.value ??
-              item.dietType?.value;
+              item.dietType?.value ??
+              '';
         }
 
         list.add(
@@ -64,7 +115,8 @@ class PatientController {
         for (FoodModel item in meal) {
           map[item.name] = item.sugarType?.value ??
               item.fillingType?.value ??
-              item.dietType?.value;
+              item.dietType?.value ??
+              '';
         }
 
         reference.update({

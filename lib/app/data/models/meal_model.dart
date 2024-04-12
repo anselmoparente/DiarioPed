@@ -1,5 +1,5 @@
 class MealModel {
-  final Map<String, String> foods;
+  final Map<String, dynamic> foods;
   final DateTime date;
 
   MealModel({required this.foods, required this.date});
