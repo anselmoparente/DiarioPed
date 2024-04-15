@@ -72,6 +72,11 @@ class _AddMealState extends State<AddMeal> {
                     ),
                     child: ListView.separated(
                       itemCount: controller.meal.length,
+                      separatorBuilder: (context, index) {
+                        return const Divider(
+                          color: Colors.grey,
+                        );
+                      },
                       itemBuilder: (context, index) {
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,11 +163,6 @@ class _AddMealState extends State<AddMeal> {
                           ],
                         );
                       },
-                      separatorBuilder: (context, index) {
-                        return const Divider(
-                          color: Colors.grey,
-                        );
-                      },
                     ),
                   ),
                 ),
@@ -220,8 +220,9 @@ class _AddMealState extends State<AddMeal> {
                             child: ListView.builder(
                               padding: const EdgeInsets.all(4.0),
                               scrollDirection: Axis.horizontal,
-                              itemCount:
-                                  meal.text.isEmpty ? foodsList.length : aux.length,
+                              itemCount: meal.text.isEmpty
+                                  ? foodsList.length
+                                  : aux.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   child: Container(
@@ -253,7 +254,8 @@ class _AddMealState extends State<AddMeal> {
                                                 : aux[index],
                                             style: TextStyle(
                                               color: (meal.text.isEmpty)
-                                                  ? foodsList[index] == selectedFood
+                                                  ? foodsList[index] ==
+                                                          selectedFood
                                                       ? Colors.white
                                                       : Colors.black
                                                   : aux[index] == selectedFood

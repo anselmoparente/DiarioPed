@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutriped/app/data/models/meal_model.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/pages/add_meal.dart';
+import 'package:nutriped/app/ui/pages/details_meal.dart';
 import 'package:nutriped/app/ui/pages/home_page.dart';
 import 'package:nutriped/app/ui/pages/introduction_page.dart';
 import 'package:nutriped/app/ui/pages/link_page.dart';
@@ -39,6 +41,12 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => const AddMeal(),
         ),
         GoRoute(
+          path: 'details',
+          name: '/details',
+          builder: (context, state) =>
+              DetailsMeal(meal: state.extra as MealModel),
+        ),
+        GoRoute(
           path: 'home',
           name: '/home',
           builder: (context, state) => HomePage(),
@@ -47,6 +55,11 @@ final GoRouter _router = GoRouter(
           path: 'introduction',
           name: '/introduction',
           builder: (context, state) => const IntroductionPage(),
+        ),
+        GoRoute(
+          path: 'link',
+          name: '/link',
+          builder: (context, state) => const LinkPage(),
         ),
         GoRoute(
           path: 'login',
@@ -62,11 +75,6 @@ final GoRouter _router = GoRouter(
           path: 'register',
           name: '/register',
           builder: (context, state) => const RegisterPage(),
-        ),
-        GoRoute(
-          path: 'link',
-          name: '/link',
-          builder: (context, state) => const LinkPage(),
         ),
       ],
     ),

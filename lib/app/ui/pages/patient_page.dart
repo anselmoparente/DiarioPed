@@ -91,45 +91,54 @@ class _PatientPageState extends State<PatientPage> {
             thumbColor: Colors.grey,
             child: GridView.count(
               crossAxisCount: 2,
-              children: List.generate(controller.meals.length, (index) {
-                DateTime date = controller.meals[index].date;
+              children: List.generate(
+                controller.meals.length,
+                (index) {
+                  DateTime date = controller.meals[index].date;
 
-                return Container(
-                  margin: const EdgeInsets.all(16.0),
-                  decoration: const BoxDecoration(
-                    color: NutripedColors.primary1,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                          ),
+                  return GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.all(16.0),
+                      decoration: const BoxDecoration(
+                        color: NutripedColors.primary1,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
                         ),
-                        Text(
-                          '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
-                          ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            Text(
+                              '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                    onTap: () => GoRouter.of(context).pushNamed(
+                      '/details',
+                      extra: controller.meals[index],
+                    ),
+                  );
+                },
+              ),
             ),
           );
         },
