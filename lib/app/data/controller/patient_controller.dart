@@ -10,10 +10,12 @@ import 'package:nutriped/app/data/models/meal_model.dart';
 
 class PatientController {
   List<FoodModel> meal = [];
-  late List<MealModel> meals;
+  List<MealModel> meals = [];
 
   Future<void> getMeals({String? id}) async {
     try {
+      meals.clear();
+
       if (id == null) {
         meals.clear();
 
@@ -22,7 +24,7 @@ class PatientController {
         DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
         if (Platform.isAndroid) {
           var androidInfo = await deviceInfo.androidInfo;
-          deviceID = androidInfo.id;
+          deviceID = androidInfo.id;  
         }
 
         if (Platform.isIOS) {
@@ -42,7 +44,7 @@ class PatientController {
         var data = jsonEncode(snapshot.value);
         Map<String, dynamic> map = jsonDecode(data);
 
-        if (map['meals'].isEmpty) {
+        if (map['meals'] == null) {
           meals = [];
         } else {
           map['meals'].forEach((element) {
@@ -119,6 +121,8 @@ class PatientController {
               '';
         }
 
+        meals.add(MealModel(foods: map, date: time));
+
         reference.update({
           'meals': [
             {
@@ -127,6 +131,8 @@ class PatientController {
             },
           ],
         });
+
+        meal.clear();
       }
 
       return true;

@@ -136,7 +136,9 @@ class _PatientPageState extends State<PatientPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => GoRouter.of(context).pushNamed('/add_meal'),
+        onPressed: () => GoRouter.of(context)
+            .pushNamed('/add_meal')
+            .then((value) => setState(() {})),
       ),
     );
   }
