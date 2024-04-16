@@ -31,7 +31,7 @@ class DetailsController {
         });
       }
 
-      log(meals.toString());
+      
     } catch (e) {
       log(e.toString());
       meals = [];
