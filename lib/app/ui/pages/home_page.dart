@@ -71,7 +71,9 @@ class HomePage extends StatelessWidget {
                         'No momento, ainda não existe nenhum paciente vinculado!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 18.0, color: NutripedColors.text),
+                          fontSize: 18.0,
+                          color: NutripedColors.text,
+                        ),
                       ),
                     )
                   ],
@@ -87,43 +89,52 @@ class HomePage extends StatelessWidget {
             thumbColor: Colors.grey,
             child: GridView.count(
               crossAxisCount: 2,
-              children: List.generate(controller.patients.length, (index) {
-                return Container(
-                  margin: const EdgeInsets.all(16.0),
-                  decoration: const BoxDecoration(
-                    color: NutripedColors.primary1,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.patients[index].name,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0,
-                          ),
+              children: List.generate(
+                controller.patients.length,
+                (index) {
+                  return GestureDetector(
+                    child: Container(
+                      margin: const EdgeInsets.all(16.0),
+                      decoration: const BoxDecoration(
+                        color: NutripedColors.primary1,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
                         ),
-                        Text(
-                          controller.patients[index].birthday,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.0,
-                          ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              controller.patients[index].name,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            Text(
+                              controller.patients[index].birthday,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.0,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              }),
+                    onTap: () => GoRouter.of(context).pushNamed(
+                      '/details_patient',
+                      extra: controller.patients[index],
+                    ),
+                  );
+                },
+              ),
             ),
           );
         },

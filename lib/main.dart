@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/models/meal_model.dart';
+import 'package:nutriped/app/data/models/patient_model.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
 import 'package:nutriped/app/ui/pages/add_meal.dart';
 import 'package:nutriped/app/ui/pages/details_meal.dart';
+import 'package:nutriped/app/ui/pages/details_patient.dart';
 import 'package:nutriped/app/ui/pages/home_page.dart';
 import 'package:nutriped/app/ui/pages/introduction_page.dart';
 import 'package:nutriped/app/ui/pages/link_page.dart';
@@ -45,6 +47,12 @@ final GoRouter _router = GoRouter(
           name: '/details',
           builder: (context, state) =>
               DetailsMeal(meal: state.extra as MealModel),
+        ),
+        GoRoute(
+          path: 'details_patient',
+          name: '/details_patient',
+          builder: (context, state) =>
+              DetailsPatient(patient: state.extra as PatientModel),
         ),
         GoRoute(
           path: 'home',
