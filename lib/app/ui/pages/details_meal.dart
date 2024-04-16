@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/models/meal_model.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
+import 'package:nutriped/app/ui/widgets/food_item.dart';
 
 class DetailsMeal extends StatelessWidget {
   final MealModel meal;
@@ -77,29 +78,7 @@ class DetailsMeal extends StatelessWidget {
                     String title = meal.foods.keys.elementAt(index);
                     String description = meal.foods.values.elementAt(index);
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            fontSize: 22.0,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w800,
-                            color: NutripedColors.button,
-                          ),
-                        ),
-                        Text(
-                          description != '' ? description : 'Sem observação!',
-                          style: const TextStyle(
-                            fontSize: 16.0,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    );
+                    return FoodItem(title: title, description: description);
                   },
                 ),
               ),
