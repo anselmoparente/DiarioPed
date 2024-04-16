@@ -29,7 +29,11 @@ class DashboardController {
       final map = {'id': id};
       mapPatient.addEntries(map.entries);
 
-      patients.add(PatientModel.fromMap(mapPatient));
+      PatientModel patient = PatientModel.fromMap(mapPatient);
+
+      if (!patients.contains(patient)) {
+        patients.add(patient);
+      }
     }
   }
 }
