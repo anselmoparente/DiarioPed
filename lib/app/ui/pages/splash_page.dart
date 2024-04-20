@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/init_controller.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -36,17 +37,17 @@ class _SplashPageState extends State<SplashPage> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.deepPurple[50],
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Nutriped',
+            const Text(
+              'DiarioPed',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade900,
+                color: NutripedColors.itemText,
               ),
             ),
             Image.asset(

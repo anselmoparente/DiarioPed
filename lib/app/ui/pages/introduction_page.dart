@@ -10,7 +10,7 @@ class IntroductionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -23,16 +23,15 @@ class IntroductionPage extends StatelessWidget {
                   children: [
                     Container(
                       width: size.width * 0.95,
-                      decoration: BoxDecoration(
-                        color: NutripedColors.button.withOpacity(0.8),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
+                      decoration: const BoxDecoration(
+                        color: NutripedColors.itemBackGround,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       padding: const EdgeInsets.all(16.0),
                       child: const Text(
-                        textAlign: TextAlign.start,
+                        textAlign: TextAlign.start, 
                         'Bem vindo ao Nutriped!\n\nEste diário alimentar tem como objetivo identificar os alimentos que podem estar causando desequilíbrio na cavidade bucal e consequentemente a cárie.\nVocê, mãe/pai (ou outra pessoa responsável), deverá registrar quais os alimentos e a quantidade que seu/sua filho(a) consome durante 3 ou 7 dias, para que o odontopediatra possa identificar quais deles podem contribuir  para o desequilíbrio no meio bucal.\nImportante que todos os alimentos sejam anotados nos horários que são ingeridos.',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
                     SizedBox(
@@ -60,7 +59,7 @@ class IntroductionPage extends StatelessWidget {
                             vertical: 16.0,
                           ),
                           backgroundColor:
-                              NutripedColors.button.withOpacity(0.8),
+                              NutripedColors.secondary.withOpacity(0.8),
                           elevation: 2.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),
@@ -80,7 +79,7 @@ class IntroductionPage extends StatelessWidget {
                             vertical: 16.0,
                           ),
                           backgroundColor:
-                              NutripedColors.button.withOpacity(0.8),
+                              NutripedColors.secondary.withOpacity(0.8),
                           elevation: 2.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),

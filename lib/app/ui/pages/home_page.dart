@@ -15,13 +15,13 @@ class HomePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: NutripedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.logout),
-          color: Colors.white,
+          color: NutripedColors.background,
           onPressed: () async {
             await context.read<AuthService>().logout().then(
                   (value) =>
@@ -31,13 +31,13 @@ class HomePage extends StatelessWidget {
         ),
         title: const Text(
           'DashBoard',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: NutripedColors.background),
         ),
         actions: [
           IconButton(
             icon: const Icon(
               Icons.person,
-              color: Colors.white,
+              color: NutripedColors.background,
             ),
             onPressed: () {},
           ),
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.all(16.0),
                       decoration: const BoxDecoration(
-                        color: NutripedColors.primary1,
+                        color: NutripedColors.cardBackground,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),
@@ -120,7 +120,7 @@ class HomePage extends StatelessWidget {
                             Text(
                               controller.patients[index].birthday,
                               style: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 14.0,
                               ),
                             ),

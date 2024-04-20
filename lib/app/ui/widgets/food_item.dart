@@ -22,7 +22,7 @@ class FoodItem extends StatelessWidget {
             fontSize: 22.0,
             fontFamily: 'Poppins',
             fontWeight: FontWeight.w800,
-            color: NutripedColors.button,
+            color: NutripedColors.itemText,
           ),
         ),
         Text(

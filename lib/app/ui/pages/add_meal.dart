@@ -37,18 +37,18 @@ class _AddMealState extends State<AddMeal> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: NutripedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: NutripedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Adicionar refeição',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: NutripedColors.background),
         ),
       ),
       body: Padding(
@@ -67,7 +67,7 @@ class _AddMealState extends State<AddMeal> {
                     width: size.width * 0.9,
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: NutripedColors.itemBackGround,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: ListView.separated(
@@ -175,7 +175,7 @@ class _AddMealState extends State<AddMeal> {
                       width: size.width * 0.9,
                       padding: const EdgeInsets.all(8.0),
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: NutripedColors.itemBackGround,
                         borderRadius: BorderRadius.all(Radius.circular(16.0)),
                       ),
                       child: Column(
@@ -240,10 +240,10 @@ class _AddMealState extends State<AddMeal> {
                                           color: (meal.text.isEmpty)
                                               ? foodsList[index] == selectedFood
                                                   ? NutripedColors.button
-                                                  : Colors.yellow
+                                                  : Colors.white
                                               : aux[index] == selectedFood
                                                   ? NutripedColors.button
-                                                  : Colors.yellow,
+                                                  : Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                         ),
@@ -297,6 +297,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: SugarType.values.map((type) {
                                     return RadioListTile<SugarType>(
                                       title: Text(type.value),
+                                      activeColor: NutripedColors.secondary,
                                       value: type,
                                       groupValue: sugarType,
                                       onChanged: (value) => setState(
@@ -317,6 +318,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: Filling.values.map((type) {
                                     return RadioListTile<Filling>(
                                       title: Text(type.value),
+                                      activeColor: NutripedColors.secondary,
                                       value: type,
                                       groupValue: fillingType,
                                       onChanged: (value) => setState(
@@ -337,6 +339,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: Diet.values.map((type) {
                                     return RadioListTile<Diet>(
                                       title: Text(type.value),
+                                      activeColor: NutripedColors.secondary,
                                       value: type,
                                       groupValue: dietType,
                                       onChanged: (value) => setState(

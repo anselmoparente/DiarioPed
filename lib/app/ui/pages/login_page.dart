@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutriped/app/data/controller/login_controller.dart';
 import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/custom_button.dart';
 import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
 import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
@@ -24,14 +25,14 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.deepPurple[50],
+      backgroundColor: NutripedColors.background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.blue.shade900,
+          color: Colors.white,
           onPressed: () => GoRouter.of(context).pop(),
         ),
       ),
@@ -119,9 +120,10 @@ class _LoginPageState extends State<LoginPage> {
                       const Text(
                         'Esquece a senha?',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 18.0,
                           fontFamily: 'Inter',
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                       GestureDetector(
@@ -138,10 +140,10 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Trocar senha',
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 18.0,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w400,
-                              color: Colors.blue,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -153,9 +155,10 @@ class _LoginPageState extends State<LoginPage> {
                       const Text(
                         'Não possui conta?',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 16.0,
                           fontFamily: 'Inter',
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                       Container(
@@ -166,10 +169,10 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Registrar',
                             style: TextStyle(
-                              fontSize: 17,
+                              fontSize: 16.0,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w400,
-                              color: Colors.blue,
+                              color: Colors.white,
                             ),
                           ),
                         ),

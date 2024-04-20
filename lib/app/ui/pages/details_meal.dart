@@ -16,24 +16,29 @@ class DetailsMeal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: NutripedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: NutripedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Detalhes da refeição',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: NutripedColors.background),
         ),
       ),
       body: Center(
-        child: SizedBox(
+        child: Container(
           width: size.width * 0.9,
           height: size.height * 0.8,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: NutripedColors.itemBackGround,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,7 +61,7 @@ class DetailsMeal extends StatelessWidget {
                           fontSize: 18.0,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF99AABB),
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -77,7 +82,7 @@ class DetailsMeal extends StatelessWidget {
                   itemBuilder: (context, index) {
                     String title = meal.foods.keys.elementAt(index);
                     String description = meal.foods.values.elementAt(index);
-
+          
                     return FoodItem(title: title, description: description);
                   },
                 ),

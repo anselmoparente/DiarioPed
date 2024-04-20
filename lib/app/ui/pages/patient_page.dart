@@ -21,13 +21,13 @@ class _PatientPageState extends State<PatientPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: NutripedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.logout),
-          color: Colors.white,
+          color: NutripedColors.background,
           onPressed: () async {
             await context.read<AuthService>().logout().then(
                   (value) =>
@@ -37,11 +37,11 @@ class _PatientPageState extends State<PatientPage> {
         ),
         title: const Text(
           'Diário',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: NutripedColors.background),
         ),
         actions: [
           IconButton(
-            color: Colors.white,
+            color: NutripedColors.background,
             icon: const Icon(Icons.person),
             onPressed: () {},
           ),
@@ -100,7 +100,7 @@ class _PatientPageState extends State<PatientPage> {
                     child: Container(
                       margin: const EdgeInsets.all(16.0),
                       decoration: const BoxDecoration(
-                        color: NutripedColors.primary1,
+                        color: NutripedColors.cardBackground,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),
@@ -144,6 +144,7 @@ class _PatientPageState extends State<PatientPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
         child: const Icon(Icons.add),
         onPressed: () => GoRouter.of(context)
             .pushNamed('/add_meal')

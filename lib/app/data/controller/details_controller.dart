@@ -23,15 +23,11 @@ class DetailsController {
         meals = [];
       } else {
         map['meals'].forEach((element) {
-          map['meals'].forEach((element) {
-            DateTime date = DateTime.parse(element['date']);
-            Map<String, dynamic> aux = element['foods'];
-            meals.add(MealModel(foods: aux, date: date));
-          });
+          DateTime date = DateTime.parse(element['date']);
+          Map<String, dynamic> aux = element['foods'];
+          meals.add(MealModel(foods: aux, date: date));
         });
       }
-
-      
     } catch (e) {
       log(e.toString());
       meals = [];

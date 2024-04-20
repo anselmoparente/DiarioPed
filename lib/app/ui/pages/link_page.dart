@@ -28,7 +28,7 @@ class _LinkPageState extends State<LinkPage> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.deepPurple[50],
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -38,7 +38,7 @@ class _LinkPageState extends State<LinkPage> {
             onTap: () => GoRouter.of(context).pop(),
             child: const Text(
               'Cancelar',
-              style: TextStyle(fontSize: 18.0, color: NutripedColors.button),
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
           ),
         ),
@@ -79,7 +79,7 @@ class _LinkPageState extends State<LinkPage> {
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                       );
-      
+
                       if (datePick != null) {
                         selectedDate = datePick;
                         String day = datePick.day.toString().padLeft(2, '0');
@@ -109,6 +109,7 @@ class _LinkPageState extends State<LinkPage> {
                 builder: (context, child) {
                   return CustomButton(
                     text: 'Vincular',
+                    textColor: Colors.white,
                     isLoading: _controller.isLoading,
                     onPressed: () async {
                       if (name.text.length > 8 && birthday.text.isNotEmpty) {

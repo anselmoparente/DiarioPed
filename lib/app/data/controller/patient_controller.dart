@@ -16,45 +16,42 @@ class PatientController {
     try {
       meals.clear();
 
-      if (id == null) {
-        meals.clear();
+      String? deviceID;
 
-        String? deviceID;
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      if (Platform.isAndroid) {
+        var androidInfo = await deviceInfo.androidInfo;
+        deviceID = androidInfo.id;
+      }
 
-        DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-        if (Platform.isAndroid) {
-          var androidInfo = await deviceInfo.androidInfo;
-          deviceID = androidInfo.id;  
-        }
+      if (Platform.isIOS) {
+        var iosInfo = await deviceInfo.iosInfo;
+        deviceID = iosInfo.identifierForVendor!;
+      }
 
-        if (Platform.isIOS) {
-          var iosInfo = await deviceInfo.iosInfo;
-          deviceID = iosInfo.identifierForVendor!;
-        }
+      if (deviceID != null) {
+        deviceID = deviceID.replaceAll('.', '');
+      }
 
-        if (deviceID != null) {
-          deviceID = deviceID.replaceAll('.', '');
-        }
+      final reference = FirebaseDatabase.instance.ref().child(
+            'patients/$deviceID',
+          );
 
-        final reference = FirebaseDatabase.instance.ref().child(
-              'patients/$deviceID',
-            );
+      final snapshot = await reference.get();
+      var data = jsonEncode(snapshot.value);
+      Map<String, dynamic> map = jsonDecode(data);
 
-        final snapshot = await reference.get();
-        var data = jsonEncode(snapshot.value);
-        Map<String, dynamic> map = jsonDecode(data);
-
-        if (map['meals'] == null) {
-          meals = [];
-        } else {
-          map['meals'].forEach((element) {
-            map['meals'].forEach((element) {
-              DateTime date = DateTime.parse(element['date']);
-              Map<String, dynamic> aux = element['foods'];
-              meals.add(MealModel(foods: aux, date: date));
-            });
-          });
-        }
+      if (map['meals'] == null) {
+        meals = [];
+      } else {
+        map['meals'].forEach((element) {
+          DateTime date = DateTime.parse(element['date']);
+          Map<String, dynamic> aux = element['foods'];
+          MealModel meal = MealModel(foods: aux, date: date);
+          if (!meals.contains(meal)) {
+            meals.add(MealModel(foods: aux, date: date));
+          }
+        });
       }
     } catch (e) {
       log(e.toString());

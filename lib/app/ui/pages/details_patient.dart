@@ -18,18 +18,21 @@ class DetailsPatient extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.backgroundColor,
+      backgroundColor: NutripedColors.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: NutripedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: NutripedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Detalhes',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+              color: NutripedColors.background,
+              fontWeight: FontWeight.bold,
+              fontSize: 24.0),
         ),
       ),
       body: FutureBuilder(
@@ -85,7 +88,7 @@ class DetailsPatient extends StatelessWidget {
                         fontSize: 20.0,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w800,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                       children: [
                         TextSpan(
@@ -94,13 +97,14 @@ class DetailsPatient extends StatelessWidget {
                             fontSize: 14.0,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w400,
-                            color: Color(0xFF99AABB),
+                            color: Colors.white,
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
+                const SizedBox(height: 8.0),
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -125,8 +129,9 @@ class DetailsPatient extends StatelessWidget {
 
                       return Container(
                         padding: const EdgeInsets.all(16.0),
+                        margin: EdgeInsets.only(top: index != 0 ? 16.0 : 0.0),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: NutripedColors.itemBackGround,
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                         child: IntrinsicHeight(
