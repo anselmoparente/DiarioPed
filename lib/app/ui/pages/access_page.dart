@@ -36,7 +36,7 @@ class AccessPage extends StatelessWidget {
               child: CustomButton(
                 text: 'Sou um paciente',
                 prefixIcon: Icons.person,
-                backgroundColor: NutripedColors.secondary,
+                backgroundColor: NutripedColors.button,
                 onPressed: () =>
                     GoRouter.of(context).pushNamed('/introduction'),
               ),
@@ -47,7 +47,7 @@ class AccessPage extends StatelessWidget {
               child: CustomButton(
                 text: 'Sou um dentista',
                 prefixIcon: Icons.medication,
-                backgroundColor: NutripedColors.secondary,
+                backgroundColor: NutripedColors.button,
                 onPressed: () => GoRouter.of(context).pushNamed('/login'),
               ),
             ),
