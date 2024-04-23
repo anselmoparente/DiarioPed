@@ -20,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
     Size size = MediaQuery.of(context).size;
 
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
       () => _controller.tryLogin(auth: context.read<AuthService>()).then(
         (value) {
           if (value.$1) {
@@ -54,6 +54,54 @@ class _SplashPageState extends State<SplashPage> {
               'assets/images/splash_icon.png',
               height: size.width * 0.9,
               width: size.width * 0.9,
+            ),
+            const Text(
+              'Autores',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: NutripedColors.itemText,
+              ),
+            ),
+            const Text(
+              'Francisco Xavier Paranhos Coêlho Simões',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const Text(
+              'Morgana Gradvohl',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const Text(
+              'Ana Carolina Del-Sarto Azevedo Maia',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const Text(
+              'Nilton César Nogueira dos Santos',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const Text(
+              'Carla Figueiredo Brandão',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
           ],
         ),
