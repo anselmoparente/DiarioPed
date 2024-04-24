@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
-                color: NutripedColors.primary5,
+                color: Colors.white,
               ),
             );
           }
