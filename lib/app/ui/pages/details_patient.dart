@@ -31,9 +31,10 @@ class DetailsPatient extends StatelessWidget {
         title: const Text(
           'Detalhes',
           style: TextStyle(
-              color: NutripedColors.background,
-              fontWeight: FontWeight.bold,
-              fontSize: 24.0),
+            color: NutripedColors.background,
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+          ),
         ),
       ),
       body: FutureBuilder(
@@ -123,7 +124,11 @@ class DetailsPatient extends StatelessWidget {
                         items.add(title);
                         String description = foods.values.elementAt(i);
                         widgets.add(
-                          FoodItem(title: title, description: description),
+                          FoodItem(
+                            title: title,
+                            description: description,
+                            isWarning: checked.contains(items[index]),
+                          ),
                         );
 
                         if (i < (foods.length - 1)) {

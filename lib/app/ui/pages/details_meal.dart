@@ -82,8 +82,12 @@ class DetailsMeal extends StatelessWidget {
                   itemBuilder: (context, index) {
                     String title = meal.foods.keys.elementAt(index);
                     String description = meal.foods.values.elementAt(index);
-          
-                    return FoodItem(title: title, description: description);
+
+                    return FoodItem(
+                      title: title,
+                      description: description,
+                      isWarning: false,
+                    );
                   },
                 ),
               ),
