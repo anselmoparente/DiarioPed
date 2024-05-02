@@ -5,13 +5,14 @@ import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/food_item.dart';
 
 class DetailsPatient extends StatelessWidget {
-  final DetailsController controller = DetailsController();
   final PatientModel patient;
 
   DetailsPatient({
     required this.patient,
     super.key,
   });
+
+  final DetailsController controller = DetailsController();
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +111,8 @@ class DetailsPatient extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     itemCount: controller.meals.length,
                     itemBuilder: (BuildContext context, int index) {
+                      List<String> items = [];
+                      List<String> checked = [];
                       List<Widget> widgets = [];
                       DateTime date = controller.meals[index].date;
                       Map<String, dynamic> foods =
@@ -117,6 +120,7 @@ class DetailsPatient extends StatelessWidget {
 
                       for (int i = 0; i < foods.length; i++) {
                         String title = foods.keys.elementAt(i);
+                        items.add(title);
                         String description = foods.values.elementAt(i);
                         widgets.add(
                           FoodItem(title: title, description: description),
@@ -127,35 +131,79 @@ class DetailsPatient extends StatelessWidget {
                         }
                       }
 
-                      return Container(
-                        padding: const EdgeInsets.all(16.0),
-                        margin: EdgeInsets.only(top: index != 0 ? 16.0 : 0.0),
-                        decoration: BoxDecoration(
-                          color: NutripedColors.itemBackGround,
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        child: IntrinsicHeight(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
+                      return GestureDetector(
+                        onDoubleTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text(
+                                  'Marque os alimentos que apresentam algum risco',
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                content: SizedBox(
+                                  height: size.height * 0.5,
+                                  child: CheckboxList(
+                                    items: items,
+                                    checked: checked,
                                   ),
-                                  Text(
-                                    '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
+                                ),
+                                actions: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Confirmar'),
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              ),
-                              const SizedBox(height: 8.0),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: widgets,
-                              ),
-                            ],
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(16.0),
+                          margin: EdgeInsets.only(top: index != 0 ? 16.0 : 0.0),
+                          decoration: BoxDecoration(
+                            color: NutripedColors.itemBackGround,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: IntrinsicHeight(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}',
+                                    ),
+                                    Text(
+                                      '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}',
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8.0),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: widgets,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -167,6 +215,46 @@ class DetailsPatient extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class CheckboxList extends StatefulWidget {
+  final List<String> items;
+  final List<String> checked;
+
+  const CheckboxList({
+    super.key,
+    required this.items,
+    required this.checked,
+  });
+
+  @override
+  State<CheckboxList> createState() => _CheckboxListState();
+}
+
+class _CheckboxListState extends State<CheckboxList> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: widget.items.length,
+      itemBuilder: (BuildContext context, int index) {
+        return CheckboxListTile(
+          title: Text(widget.items[index]),
+          value: widget.checked.contains(widget.items[index]),
+          onChanged: (bool? value) {
+            setState(
+              () {
+                if (widget.checked.contains(widget.items[index])) {
+                  widget.checked.remove(widget.items[index]);
+                } else {
+                  widget.checked.add(widget.items[index]);
+                }
+              },
+            );
+          },
+        );
+      },
     );
   }
 }
