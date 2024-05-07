@@ -46,10 +46,12 @@ class PatientController {
       } else {
         map['meals'].forEach((element) {
           DateTime date = DateTime.parse(element['date']);
-          Map<String, dynamic> aux = element['foods'];
-          MealModel meal = MealModel(foods: aux, date: date);
+          Map<String, dynamic> foods = element['foods'];
+          List<String> warnings = element['warnings'] ?? [];
+          MealModel meal =
+              MealModel(foods: foods, date: date, warnings: warnings);
           if (!meals.contains(meal)) {
-            meals.add(MealModel(foods: aux, date: date));
+            meals.add(MealModel(foods: foods, date: date, warnings: warnings));
           }
         });
       }
@@ -118,7 +120,7 @@ class PatientController {
               '';
         }
 
-        meals.add(MealModel(foods: map, date: time));
+        meals.add(MealModel(foods: map, date: time, warnings: []));
 
         reference.update({
           'meals': [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nutriped/app/data/controller/details_controller.dart';
+import 'package:nutriped/app/data/models/meal_model.dart';
 import 'package:nutriped/app/data/models/patient_model.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/food_item.dart';
@@ -20,6 +21,14 @@ class DetailsPatient extends StatefulWidget {
 }
 
 class _DetailsPatientState extends State<DetailsPatient> {
+  late Future<bool> _isCharge;
+
+  @override
+  void initState() {
+    super.initState();
+    _isCharge = widget.controller.getMeals();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,7 +53,7 @@ class _DetailsPatientState extends State<DetailsPatient> {
         ),
       ),
       body: FutureBuilder(
-        future: widget.controller.getMeals(),
+        future: _isCharge,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -118,22 +127,21 @@ class _DetailsPatientState extends State<DetailsPatient> {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     itemCount: widget.controller.meals.length,
                     itemBuilder: (BuildContext context, int index) {
-                      List<String> items = [];
-                      List<String> checked = [];
                       List<Widget> widgets = [];
                       DateTime date = widget.controller.meals[index].date;
                       Map<String, dynamic> foods =
                           widget.controller.meals[index].foods;
+                      List<String> warnings =
+                          widget.controller.meals[index].warnings;
 
                       for (int i = 0; i < foods.length; i++) {
                         String title = foods.keys.elementAt(i);
-                        items.add(title);
                         String description = foods.values.elementAt(i);
                         widgets.add(
                           FoodItem(
                             title: title,
                             description: description,
-                            isWarning: checked.contains(items[index]),
+                            isWarning: warnings.contains(title),
                           ),
                         );
 
@@ -158,8 +166,8 @@ class _DetailsPatientState extends State<DetailsPatient> {
                                 content: SizedBox(
                                   height: size.height * 0.5,
                                   child: CheckboxList(
-                                    items: items,
-                                    checked: checked,
+                                    meals: widget.controller.meals,
+                                    indexMeal: index,
                                   ),
                                 ),
                                 actions: [
@@ -176,6 +184,7 @@ class _DetailsPatientState extends State<DetailsPatient> {
                                       TextButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
+                                          setState(() {});
                                         },
                                         child: const Text('Confirmar'),
                                       ),
@@ -232,13 +241,13 @@ class _DetailsPatientState extends State<DetailsPatient> {
 }
 
 class CheckboxList extends StatefulWidget {
-  final List<String> items;
-  final List<String> checked;
+  final List<MealModel> meals;
+  final int indexMeal;
 
   const CheckboxList({
     super.key,
-    required this.items,
-    required this.checked,
+    required this.meals,
+    required this.indexMeal,
   });
 
   @override
@@ -248,19 +257,20 @@ class CheckboxList extends StatefulWidget {
 class _CheckboxListState extends State<CheckboxList> {
   @override
   Widget build(BuildContext context) {
+    MealModel meal = widget.meals[widget.indexMeal];
     return ListView.builder(
-      itemCount: widget.items.length,
+      itemCount: meal.foods.length,
       itemBuilder: (BuildContext context, int index) {
         return CheckboxListTile(
-          title: Text(widget.items[index]),
-          value: widget.checked.contains(widget.items[index]),
+          title: Text(meal.foods.keys.elementAt(index)),
+          value: meal.warnings.contains(meal.foods.keys.elementAt(index)),
           onChanged: (bool? value) {
             setState(
               () {
-                if (widget.checked.contains(widget.items[index])) {
-                  widget.checked.remove(widget.items[index]);
+                if (meal.warnings.contains(meal.foods.keys.elementAt(index))) {
+                  meal.warnings.remove(meal.foods.keys.elementAt(index));
                 } else {
-                  widget.checked.add(widget.items[index]);
+                  meal.warnings.add(meal.foods.keys.elementAt(index));
                 }
               },
             );

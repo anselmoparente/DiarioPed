@@ -11,7 +11,7 @@ class DetailsController {
 
   List<MealModel> meals = [];
 
-  Future<void> getMeals() async {
+  Future<bool> getMeals() async {
     try {
       meals.clear();
 
@@ -28,18 +28,33 @@ class DetailsController {
       } else {
         map['meals'].forEach((element) {
           DateTime date = DateTime.parse(element['date']);
-          Map<String, dynamic> aux = element['foods'];
-          meals.add(MealModel(foods: aux, date: date));
+          Map<String, dynamic> foods = element['foods'];
+          List<String> warnings = element['meals'] ?? [];
+          meals.add(MealModel(foods: foods, date: date, warnings: warnings));
         });
       }
+      return true;
     } catch (e) {
       log(e.toString());
       meals = [];
+      return false;
     }
   }
 
-  Future<void> sendWarnings({
-    required String id,
-    required List<String> warnings,
-  }) async {}
+  Future<void> sendWarnings() async {
+    final reference = FirebaseDatabase.instance.ref().child(
+          'patients/$id',
+        );
+
+    await reference.update({
+      'meals': [
+        for (MealModel meal in meals)
+          {
+            'foods': meal.foods,
+            'date': meal.date,
+            'warnings': meal.warnings,
+          },
+      ],
+    });
+  }
 }
