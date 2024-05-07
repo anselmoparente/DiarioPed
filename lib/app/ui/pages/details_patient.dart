@@ -4,16 +4,22 @@ import 'package:nutriped/app/data/models/patient_model.dart';
 import 'package:nutriped/app/ui/theme/design_system.dart';
 import 'package:nutriped/app/ui/widgets/food_item.dart';
 
-class DetailsPatient extends StatelessWidget {
+class DetailsPatient extends StatefulWidget {
   final PatientModel patient;
+  late final DetailsController controller;
 
   DetailsPatient({
     required this.patient,
     super.key,
-  });
+  }) {
+    controller = DetailsController(id: patient.id);
+  }
 
-  final DetailsController controller = DetailsController();
+  @override
+  State<DetailsPatient> createState() => _DetailsPatientState();
+}
 
+class _DetailsPatientState extends State<DetailsPatient> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,7 +44,7 @@ class DetailsPatient extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
-        future: controller.getMeals(id: patient.id),
+        future: widget.controller.getMeals(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -48,7 +54,7 @@ class DetailsPatient extends StatelessWidget {
             );
           }
 
-          if (controller.meals.isEmpty) {
+          if (widget.controller.meals.isEmpty) {
             Center(
               child: IntrinsicHeight(
                 child: Column(
@@ -85,7 +91,7 @@ class DetailsPatient extends StatelessWidget {
                   child: RichText(
                     overflow: TextOverflow.visible,
                     text: TextSpan(
-                      text: patient.name,
+                      text: widget.patient.name,
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontFamily: 'Poppins',
@@ -94,7 +100,7 @@ class DetailsPatient extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '  ${patient.birthday}',
+                          text: '  ${widget.patient.birthday}',
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontFamily: 'Poppins',
@@ -110,14 +116,14 @@ class DetailsPatient extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    itemCount: controller.meals.length,
+                    itemCount: widget.controller.meals.length,
                     itemBuilder: (BuildContext context, int index) {
                       List<String> items = [];
                       List<String> checked = [];
                       List<Widget> widgets = [];
-                      DateTime date = controller.meals[index].date;
+                      DateTime date = widget.controller.meals[index].date;
                       Map<String, dynamic> foods =
-                          controller.meals[index].foods;
+                          widget.controller.meals[index].foods;
 
                       for (int i = 0; i < foods.length; i++) {
                         String title = foods.keys.elementAt(i);
@@ -145,8 +151,9 @@ class DetailsPatient extends StatelessWidget {
                                 title: const Text(
                                   'Marque os alimentos que apresentam algum risco',
                                   style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 content: SizedBox(
                                   height: size.height * 0.5,

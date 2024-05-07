@@ -5,9 +5,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:nutriped/app/data/models/meal_model.dart';
 
 class DetailsController {
+  final String id;
+
+  DetailsController({required this.id});
+
   List<MealModel> meals = [];
 
-  Future<void> getMeals({required String id}) async {
+  Future<void> getMeals() async {
     try {
       meals.clear();
 
@@ -33,4 +37,9 @@ class DetailsController {
       meals = [];
     }
   }
+
+  Future<void> sendWarnings({
+    required String id,
+    required List<String> warnings,
+  }) async {}
 }
