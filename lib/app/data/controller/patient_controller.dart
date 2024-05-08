@@ -153,6 +153,7 @@ class PatientController {
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: lastDate,
+      locale: Localizations.localeOf(context),
     );
 
     if (selectedDate == null) return null;

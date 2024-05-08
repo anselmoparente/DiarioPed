@@ -78,6 +78,7 @@ class _LinkPageState extends State<LinkPage> {
                         initialDate: selectedDate ?? DateTime.now(),
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
+                        locale: Localizations.localeOf(context),
                       );
 
                       if (datePick != null) {
