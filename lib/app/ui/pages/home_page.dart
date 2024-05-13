@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.person,
+              Icons.link,
               color: NutripedColors.background,
             ),
             onPressed: () {},

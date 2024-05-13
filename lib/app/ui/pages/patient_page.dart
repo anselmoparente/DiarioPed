@@ -39,13 +39,6 @@ class _PatientPageState extends State<PatientPage> {
           'Diário',
           style: TextStyle(color: NutripedColors.background),
         ),
-        actions: [
-          IconButton(
-            color: NutripedColors.background,
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: FutureBuilder(
         future: controller.getMeals(),
