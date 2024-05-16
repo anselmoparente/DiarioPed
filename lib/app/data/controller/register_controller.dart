@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:diarioped/app/data/services/auth_service.dart';
 
 class RegisterController {
   var isLoading$ = ValueNotifier(false);

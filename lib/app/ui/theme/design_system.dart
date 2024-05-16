@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class NutripedColors {
-  NutripedColors._();
+class DiariopedColors {
+  DiariopedColors._();
   static const Color background = Color(0xFF0abab5);
   static const Color button = Color(0xFFf1b9ac);
   static const Color text = Color(0xFF160333);
@@ -17,18 +17,18 @@ class NutripedColors {
   static const Color secondary = Color(0xFF4739F7);
 }
 
-class NutripedTypography {
-  NutripedTypography._();
+class DiariopedTypography {
+  DiariopedTypography._();
 }
 
-class NutripedIcons {
-  NutripedIcons._();
+class DiariopedIcons {
+  DiariopedIcons._();
 }
 
-class NutripedIlustrations {
-  NutripedIlustrations._();
+class DiariopedIlustrations {
+  DiariopedIlustrations._();
 }
 
-class NutripedBoxShadow {
-  NutripedBoxShadow._();
+class DiariopedBoxShadow {
+  DiariopedBoxShadow._();
 }

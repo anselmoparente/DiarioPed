@@ -1,6 +1,6 @@
-# Nutriped
+# DiarioPed
 
-![Logo do Nutriped](link_para_o_logo.png)
+![Logo do DiarioPed](link_para_o_logo.png)
 
 Um aplicativo de diário alimentar desenvolvido em Flutter para ajudá-lo a monitorar e registrar sua ingestão diária de alimentos.
 

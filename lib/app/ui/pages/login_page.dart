@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/data/controller/login_controller.dart';
-import 'package:nutriped/app/data/services/auth_service.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/custom_button.dart';
-import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
-import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
+import 'package:diarioped/app/data/controller/login_controller.dart';
+import 'package:diarioped/app/data/services/auth_service.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/custom_button.dart';
+import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
+import 'package:diarioped/app/ui/widgets/custom_text_form_field.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,

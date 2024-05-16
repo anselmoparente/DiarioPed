@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/data/controller/dashboard_controller.dart';
-import 'package:nutriped/app/data/services/auth_service.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/data/controller/dashboard_controller.dart';
+import 'package:diarioped/app/data/services/auth_service.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,13 +15,13 @@ class HomePage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: NutripedColors.button,
+        backgroundColor: DiariopedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.logout),
-          color: NutripedColors.background,
+          color: DiariopedColors.background,
           onPressed: () async {
             await context.read<AuthService>().logout().then(
                   (value) =>
@@ -31,13 +31,13 @@ class HomePage extends StatelessWidget {
         ),
         title: const Text(
           'DashBoard',
-          style: TextStyle(color: NutripedColors.background),
+          style: TextStyle(color: DiariopedColors.background),
         ),
         actions: [
           IconButton(
             icon: const Icon(
               Icons.link,
-              color: NutripedColors.background,
+              color: DiariopedColors.background,
             ),
             onPressed: () {},
           ),
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                     const Icon(
                       Icons.group_off,
                       size: 108.0,
-                      color: NutripedColors.icon,
+                      color: DiariopedColors.icon,
                     ),
                     const SizedBox(height: 16.0),
                     SizedBox(
@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18.0,
-                          color: NutripedColors.text,
+                          color: DiariopedColors.text,
                         ),
                       ),
                     )
@@ -96,7 +96,7 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       margin: const EdgeInsets.all(16.0),
                       decoration: const BoxDecoration(
-                        color: NutripedColors.cardBackground,
+                        color: DiariopedColors.cardBackground,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10.0),
                         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
       height: 48.0,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor ?? NutripedColors.button,
+          backgroundColor: backgroundColor ?? DiariopedColors.button,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
             side: borderColor != null

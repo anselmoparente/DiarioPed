@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/custom_button.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/custom_button.dart';
 
 class AccessPage extends StatelessWidget {
   const AccessPage({super.key});
@@ -27,7 +27,7 @@ class AccessPage extends StatelessWidget {
                 fontSize: 24.0,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w500,
-                color: NutripedColors.text,
+                color: DiariopedColors.text,
               ),
             ),
             const SizedBox(height: 32.0),
@@ -36,7 +36,7 @@ class AccessPage extends StatelessWidget {
               child: CustomButton(
                 text: 'Sou um paciente',
                 prefixIcon: Icons.person,
-                backgroundColor: NutripedColors.button,
+                backgroundColor: DiariopedColors.button,
                 onPressed: () =>
                     GoRouter.of(context).pushNamed('/introduction'),
               ),
@@ -47,7 +47,7 @@ class AccessPage extends StatelessWidget {
               child: CustomButton(
                 text: 'Sou um dentista',
                 prefixIcon: Icons.medication,
-                backgroundColor: NutripedColors.button,
+                backgroundColor: DiariopedColors.button,
                 onPressed: () => GoRouter.of(context).pushNamed('/login'),
               ),
             ),

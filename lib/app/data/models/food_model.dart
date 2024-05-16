@@ -1,4 +1,4 @@
-import 'package:nutriped/app/data/constants.dart';
+import 'package:diarioped/app/data/constants.dart';
 
 class FoodModel {
   final String name;

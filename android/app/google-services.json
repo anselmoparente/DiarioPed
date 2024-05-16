@@ -1,15 +1,16 @@
 {
   "project_info": {
     "project_number": "661304143028",
+    "firebase_url": "https://nutriped-01-default-rtdb.firebaseio.com",
     "project_id": "nutriped-01",
     "storage_bucket": "nutriped-01.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:661304143028:android:3321f58b184b10704c3be1",
+        "mobilesdk_app_id": "1:661304143028:android:7bc45de6de4a81fb4c3be1",
         "android_client_info": {
-          "package_name": "com.example.nutriped"
+          "package_name": "com.example.diarioped"
         }
       },
       "oauth_client": [],

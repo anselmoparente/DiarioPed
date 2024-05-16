@@ -1,4 +1,4 @@
-package com.example.nutriped
+package com.example.diarioped
 
 import io.flutter.embedding.android.FlutterActivity
 

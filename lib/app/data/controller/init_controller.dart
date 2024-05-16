@@ -1,4 +1,4 @@
-import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:diarioped/app/data/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InitController {

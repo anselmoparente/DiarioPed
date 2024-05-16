@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:nutriped/app/data/models/meal_model.dart';
+import 'package:diarioped/app/data/models/meal_model.dart';
 
 class DetailsController {
   final String id;

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
-import 'package:nutriped/app/data/models/patient_model.dart';
-import 'package:nutriped/app/data/services/auth_service.dart';
+import 'package:diarioped/app/data/models/patient_model.dart';
+import 'package:diarioped/app/data/services/auth_service.dart';
 
 class DashboardController {
   List<PatientModel> patients = [];

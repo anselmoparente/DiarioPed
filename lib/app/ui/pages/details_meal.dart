@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nutriped/app/data/models/meal_model.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/food_item.dart';
+import 'package:diarioped/app/data/models/meal_model.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/food_item.dart';
 
 class DetailsMeal extends StatelessWidget {
   final MealModel meal;
@@ -16,18 +16,18 @@ class DetailsMeal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: NutripedColors.button,
+        backgroundColor: DiariopedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: NutripedColors.background,
+          color: DiariopedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Detalhes da refeição',
-          style: TextStyle(color: NutripedColors.background),
+          style: TextStyle(color: DiariopedColors.background),
         ),
       ),
       body: Center(
@@ -37,7 +37,7 @@ class DetailsMeal extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16.0),
-            color: NutripedColors.itemBackGround,
+            color: DiariopedColors.itemBackGround,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

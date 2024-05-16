@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:nutriped/app/data/models/food_model.dart';
-import 'package:nutriped/app/data/models/meal_model.dart';
+import 'package:diarioped/app/data/models/food_model.dart';
+import 'package:diarioped/app/data/models/meal_model.dart';
 
 class PatientController {
   List<FoodModel> meal = [];

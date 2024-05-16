@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/data/controller/register_controller.dart';
-import 'package:nutriped/app/ui/widgets/custom_button.dart';
-import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
+import 'package:diarioped/app/data/controller/register_controller.dart';
+import 'package:diarioped/app/ui/widgets/custom_button.dart';
+import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

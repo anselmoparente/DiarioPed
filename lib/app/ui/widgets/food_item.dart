@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
 
 class FoodItem extends StatelessWidget {
   final String title;
@@ -29,7 +27,7 @@ class FoodItem extends StatelessWidget {
                 fontSize: 22.0,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w800,
-                color: NutripedColors.itemText,
+                color: DiariopedColors.itemText,
               ),
             ),
             Text(

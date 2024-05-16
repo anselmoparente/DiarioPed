@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/data/constants.dart';
-import 'package:nutriped/app/data/controller/patient_controller.dart';
-import 'package:nutriped/app/data/models/food_model.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/custom_button.dart';
-import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
-import 'package:nutriped/app/ui/widgets/custom_text_form_field.dart';
+import 'package:diarioped/app/data/constants.dart';
+import 'package:diarioped/app/data/controller/patient_controller.dart';
+import 'package:diarioped/app/data/models/food_model.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/custom_button.dart';
+import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
+import 'package:diarioped/app/ui/widgets/custom_text_form_field.dart';
 
 class AddMeal extends StatefulWidget {
   const AddMeal({super.key});
@@ -37,18 +37,18 @@ class _AddMealState extends State<AddMeal> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: NutripedColors.button,
+        backgroundColor: DiariopedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: NutripedColors.background,
+          color: DiariopedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Adicionar refeição',
-          style: TextStyle(color: NutripedColors.background),
+          style: TextStyle(color: DiariopedColors.background),
         ),
       ),
       body: Padding(
@@ -67,7 +67,7 @@ class _AddMealState extends State<AddMeal> {
                     width: size.width * 0.9,
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
-                      color: NutripedColors.itemBackGround,
+                      color: DiariopedColors.itemBackGround,
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     child: ListView.separated(
@@ -175,7 +175,7 @@ class _AddMealState extends State<AddMeal> {
                       width: size.width * 0.9,
                       padding: const EdgeInsets.all(8.0),
                       decoration: const BoxDecoration(
-                        color: NutripedColors.itemBackGround,
+                        color: DiariopedColors.itemBackGround,
                         borderRadius: BorderRadius.all(Radius.circular(16.0)),
                       ),
                       child: Column(
@@ -239,10 +239,10 @@ class _AddMealState extends State<AddMeal> {
                                         decoration: BoxDecoration(
                                           color: (meal.text.isEmpty)
                                               ? foodsList[index] == selectedFood
-                                                  ? NutripedColors.button
+                                                  ? DiariopedColors.button
                                                   : Colors.white
                                               : aux[index] == selectedFood
-                                                  ? NutripedColors.button
+                                                  ? DiariopedColors.button
                                                   : Colors.white,
                                           borderRadius:
                                               BorderRadius.circular(8.0),
@@ -297,7 +297,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: SugarType.values.map((type) {
                                     return RadioListTile<SugarType>(
                                       title: Text(type.value),
-                                      activeColor: NutripedColors.secondary,
+                                      activeColor: DiariopedColors.secondary,
                                       value: type,
                                       groupValue: sugarType,
                                       onChanged: (value) => setState(
@@ -318,7 +318,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: Filling.values.map((type) {
                                     return RadioListTile<Filling>(
                                       title: Text(type.value),
-                                      activeColor: NutripedColors.secondary,
+                                      activeColor: DiariopedColors.secondary,
                                       value: type,
                                       groupValue: fillingType,
                                       onChanged: (value) => setState(
@@ -339,7 +339,7 @@ class _AddMealState extends State<AddMeal> {
                                   children: Diet.values.map((type) {
                                     return RadioListTile<Diet>(
                                       title: Text(type.value),
-                                      activeColor: NutripedColors.secondary,
+                                      activeColor: DiariopedColors.secondary,
                                       value: type,
                                       groupValue: dietType,
                                       onChanged: (value) => setState(
@@ -355,7 +355,7 @@ class _AddMealState extends State<AddMeal> {
                           SizedBox(
                             width: size.width * 0.7,
                             child: CustomButton(
-                              backgroundColor: NutripedColors.primary1,
+                              backgroundColor: DiariopedColors.primary1,
                               text: 'Adicionar alimento',
                               onPressed: () {
                                 if (selectedFood != null) {
@@ -388,8 +388,8 @@ class _AddMealState extends State<AddMeal> {
                             width: size.width * 0.7,
                             child: CustomButton(
                               backgroundColor: Colors.white,
-                              borderColor: NutripedColors.primary1,
-                              textColor: NutripedColors.primary1,
+                              borderColor: DiariopedColors.primary1,
+                              textColor: DiariopedColors.primary1,
                               text: 'Adicionar manualmente',
                               onPressed: () {},
                             ),
@@ -403,7 +403,7 @@ class _AddMealState extends State<AddMeal> {
                 SizedBox(
                   width: size.width * 0.9,
                   child: CustomButton(
-                    backgroundColor: NutripedColors.button,
+                    backgroundColor: DiariopedColors.button,
                     text: 'Finalizar refeição',
                     onPressed: () async {
                       if (controller.meal.isEmpty) {

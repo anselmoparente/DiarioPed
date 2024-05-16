@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nutriped/app/data/controller/link_controller.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/custom_button.dart';
-import 'package:nutriped/app/ui/widgets/custom_snackbar.dart';
+import 'package:diarioped/app/data/controller/link_controller.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/custom_button.dart';
+import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
 
 class LinkPage extends StatefulWidget {
   const LinkPage({super.key});
@@ -28,7 +28,7 @@ class _LinkPageState extends State<LinkPage> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,

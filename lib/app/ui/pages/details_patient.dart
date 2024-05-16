@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nutriped/app/data/controller/details_controller.dart';
-import 'package:nutriped/app/data/models/meal_model.dart';
-import 'package:nutriped/app/data/models/patient_model.dart';
-import 'package:nutriped/app/ui/theme/design_system.dart';
-import 'package:nutriped/app/ui/widgets/food_item.dart';
+import 'package:diarioped/app/data/controller/details_controller.dart';
+import 'package:diarioped/app/data/models/meal_model.dart';
+import 'package:diarioped/app/data/models/patient_model.dart';
+import 'package:diarioped/app/ui/theme/design_system.dart';
+import 'package:diarioped/app/ui/widgets/food_item.dart';
 
 class DetailsPatient extends StatefulWidget {
   final PatientModel patient;
@@ -34,19 +34,19 @@ class _DetailsPatientState extends State<DetailsPatient> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: NutripedColors.background,
+      backgroundColor: DiariopedColors.background,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: NutripedColors.button,
+        backgroundColor: DiariopedColors.button,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          color: NutripedColors.background,
+          color: DiariopedColors.background,
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Detalhes',
           style: TextStyle(
-            color: NutripedColors.background,
+            color: DiariopedColors.background,
             fontWeight: FontWeight.bold,
             fontSize: 24.0,
           ),
@@ -71,7 +71,7 @@ class _DetailsPatientState extends State<DetailsPatient> {
                     const Icon(
                       Icons.group_off,
                       size: 108.0,
-                      color: NutripedColors.icon,
+                      color: DiariopedColors.icon,
                     ),
                     const SizedBox(height: 16.0),
                     SizedBox(
@@ -81,7 +81,7 @@ class _DetailsPatientState extends State<DetailsPatient> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18.0,
-                          color: NutripedColors.text,
+                          color: DiariopedColors.text,
                         ),
                       ),
                     )
@@ -199,7 +199,7 @@ class _DetailsPatientState extends State<DetailsPatient> {
                           padding: const EdgeInsets.all(16.0),
                           margin: EdgeInsets.only(top: index != 0 ? 16.0 : 0.0),
                           decoration: BoxDecoration(
-                            color: NutripedColors.itemBackGround,
+                            color: DiariopedColors.itemBackGround,
                             borderRadius: BorderRadius.circular(16.0),
                           ),
                           child: IntrinsicHeight(
