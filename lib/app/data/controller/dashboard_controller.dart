@@ -7,6 +7,10 @@ import 'package:diarioped/app/data/services/auth_service.dart';
 class DashboardController {
   List<PatientModel> patients = [];
 
+  String getLink({required AuthService auth}) {
+    return auth.user!.uid;
+  }
+
   Future<void> getPatients({required AuthService auth}) async {
     DatabaseReference reference = FirebaseDatabase.instance.ref().child(
           'users/${auth.user!.uid}',

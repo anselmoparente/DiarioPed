@@ -1,4 +1,6 @@
+import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:diarioped/app/data/controller/dashboard_controller.dart';
 import 'package:diarioped/app/data/services/auth_service.dart';
@@ -13,6 +15,13 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    void copyToClipboard({required String textToCopy}) {
+      Clipboard.setData(ClipboardData(text: textToCopy));
+      CustomSnackBar(context).show(
+        message: 'Código copiado para a área de transferência',
+      );
+    }
 
     return Scaffold(
       backgroundColor: DiariopedColors.background,
@@ -39,7 +48,13 @@ class HomePage extends StatelessWidget {
               Icons.link,
               color: DiariopedColors.background,
             ),
-            onPressed: () {},
+            onPressed: () {
+              String link = controller.getLink(
+                auth: context.read<AuthService>(),
+              );
+
+              copyToClipboard(textToCopy: link);
+            },
           ),
         ],
       ),
