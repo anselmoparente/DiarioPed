@@ -72,7 +72,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             const Text(
-              'Morgana Gradvohl',
+              'Morgana Pontes Brasil Gradvohl',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             const Text(
-              'Nilton César Nogueira dos Santos',
+              'Nilton Cesar Nogueira dos Santos',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
