@@ -16,8 +16,7 @@ class LinkPage extends StatefulWidget {
 class _LinkPageState extends State<LinkPage> {
   TextEditingController name = TextEditingController();
   TextEditingController birthday = TextEditingController();
-  TextEditingController linkID =
-      TextEditingController(text: 'Kb0T73mIHAcGDz8VWpU9AMc90GJ2');
+  TextEditingController linkID = TextEditingController();
   DateTime? selectedDate;
 
   final LinkController _controller = LinkController();
