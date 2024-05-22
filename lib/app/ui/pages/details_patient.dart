@@ -182,9 +182,13 @@ class _DetailsPatientState extends State<DetailsPatient> {
                                         child: const Text('Cancelar'),
                                       ),
                                       TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                          setState(() {});
+                                        onPressed: () async {
+                                          await widget.controller
+                                              .sendWarnings()
+                                              .then((value) {
+                                            Navigator.of(context).pop();
+                                            setState(() {});
+                                          });
                                         },
                                         child: const Text('Confirmar'),
                                       ),

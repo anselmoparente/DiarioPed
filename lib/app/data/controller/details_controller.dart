@@ -29,7 +29,8 @@ class DetailsController {
         map['meals'].forEach((element) {
           DateTime date = DateTime.parse(element['date']);
           Map<String, dynamic> foods = element['foods'];
-          List<String> warnings = element['meals'] ?? [];
+          List<dynamic> aux = element['warnings'] ?? [];
+          List<String> warnings = aux.map((e) => e.toString()).toList();
           meals.add(MealModel(foods: foods, date: date, warnings: warnings));
         });
       }
@@ -46,15 +47,17 @@ class DetailsController {
           'patients/$id',
         );
 
+    List<Map<String, dynamic>> aux = [
+      for (MealModel meal in meals)
+        {
+          'foods': meal.foods,
+          'date': meal.date.toIso8601String(),
+          'warnings': meal.warnings,
+        },
+    ];
+
     await reference.update({
-      'meals': [
-        for (MealModel meal in meals)
-          {
-            'foods': meal.foods,
-            'date': meal.date,
-            'warnings': meal.warnings,
-          },
-      ],
+      'meals': aux,
     });
   }
 }
