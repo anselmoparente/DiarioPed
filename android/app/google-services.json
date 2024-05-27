@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:661304143028:android:7bc45de6de4a81fb4c3be1",
+        "mobilesdk_app_id": "1:661304143028:android:3a59e2ff269e1ee84c3be1",
         "android_client_info": {
-          "package_name": "com.example.diarioped"
+          "package_name": "com.phoenix.diarioped"
         }
       },
       "oauth_client": [],
