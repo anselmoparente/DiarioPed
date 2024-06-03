@@ -1,3 +1,4 @@
+import 'package:diarioped/app/ui/pages/term_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,6 +85,11 @@ final GoRouter _router = GoRouter(
           path: 'register',
           name: '/register',
           builder: (context, state) => const RegisterPage(),
+        ),
+        GoRoute(
+          path: 'term',
+          name: '/term',
+          builder: (context, state) => const TermPage(),
         ),
       ],
     ),

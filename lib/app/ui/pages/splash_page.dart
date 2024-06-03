@@ -4,6 +4,7 @@ import 'package:diarioped/app/data/controller/init_controller.dart';
 import 'package:diarioped/app/data/services/auth_service.dart';
 import 'package:diarioped/app/ui/theme/design_system.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -22,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(
       const Duration(seconds: 3),
       () => _controller.tryLogin(auth: context.read<AuthService>()).then(
-        (value) {
+        (value) async {
           if (value.$1) {
             if (value.$2 == 'patient') {
               GoRouter.of(context).pushReplacementNamed('/patient');
@@ -30,7 +31,18 @@ class _SplashPageState extends State<SplashPage> {
               GoRouter.of(context).pushReplacementNamed('/home');
             }
           } else {
-            GoRouter.of(context).pushReplacementNamed('/access');
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+
+            final bool? termAccept = prefs.getBool('termAccept');
+
+            if (context.mounted) {
+              if (termAccept == true) {
+                GoRouter.of(context).pushReplacementNamed('/access');
+              } else {
+                GoRouter.of(context).pushReplacementNamed('/term');
+              }
+            }
           }
         },
       ),
