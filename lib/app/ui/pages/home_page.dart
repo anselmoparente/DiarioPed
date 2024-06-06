@@ -1,3 +1,4 @@
+import 'package:diarioped/app/ui/widgets/alert_delete_account.dart';
 import 'package:diarioped/app/ui/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,14 +29,80 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: DiariopedColors.button,
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          color: DiariopedColors.background,
-          onPressed: () async {
-            await context.read<AuthService>().logout().then(
-                  (value) =>
-                      GoRouter.of(context).pushReplacementNamed('/access'),
-                );
+        leading: PopupMenuButton(
+          color: DiariopedColors.cardBackground,
+          padding: EdgeInsets.zero,
+          constraints: BoxConstraints(
+            minWidth: size.width * 0.4,
+            minHeight: size.height * 0.13,
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(24.0),
+              bottomLeft: Radius.circular(24.0),
+              bottomRight: Radius.circular(24.0),
+            ),
+          ),
+          child: const Icon(
+            Icons.menu,
+            color: DiariopedColors.background,
+          ),
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            const PopupMenuItem<String>(
+              value: 'logout',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Sair',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            const PopupMenuItem<String>(
+              value: 'delete',
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Excluir conta',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          onSelected: (String value) async {
+            if (value == 'logout') {
+              await context.read<AuthService>().logout().then(
+                    (value) =>
+                        GoRouter.of(context).pushReplacementNamed('/access'),
+                  );
+            } else if (value == 'delete') {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => const AlertDelete(),
+              ).then(
+                (value) async => await context
+                    .read<AuthService>()
+                    .logout()
+                    .then(
+                      (value) =>
+                          GoRouter.of(context).pushReplacementNamed('/access'),
+                    ),
+              );
+            }
           },
         ),
         title: const Text(
