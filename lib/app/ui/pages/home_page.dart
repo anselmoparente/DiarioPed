@@ -94,13 +94,13 @@ class HomePage extends StatelessWidget {
                 context: context,
                 builder: (BuildContext context) => const AlertDelete(),
               ).then(
-                (value) async => await context
-                    .read<AuthService>()
-                    .logout()
-                    .then(
-                      (value) =>
-                          GoRouter.of(context).pushReplacementNamed('/access'),
-                    ),
+                (value) async =>
+                    await context.read<AuthService>().logout().then(
+                  (value) {
+                    CustomSnackBar(context).show(message: 'Conta excluída com sucesso!');
+                    GoRouter.of(context).pushReplacementNamed('/access');
+                  },
+                ),
               );
             }
           },
