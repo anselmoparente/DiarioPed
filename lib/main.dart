@@ -109,9 +109,10 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        supportedLocales: const [Locale('pt', 'BR')],
+        supportedLocales: const [Locale('pt', 'BR'), Locale('en'), Locale('es')],
         routerConfig: _router,
       ),
     );
