@@ -94,7 +94,7 @@ class _LinkPageState extends State<LinkPage> {
                   CupertinoTextFormFieldRow(
                     controller: linkID,
                     prefix: const Text(
-                      'Link',
+                      'Código',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
