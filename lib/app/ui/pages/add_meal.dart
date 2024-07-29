@@ -18,6 +18,8 @@ class AddMeal extends StatefulWidget {
 class _AddMealState extends State<AddMeal> {
   PatientController controller = PatientController();
   TextEditingController meal = TextEditingController();
+  TextEditingController mealDialog = TextEditingController();
+  TextEditingController descriptionDialog = TextEditingController();
 
   String? selectedFood;
   SugarType? sugarType;
@@ -35,6 +37,43 @@ class _AddMealState extends State<AddMeal> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    void showAddMealDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Adicionar Alimento'),
+            content: Column(
+              children: [
+                TextField(
+                  controller: mealDialog,
+                  decoration: const InputDecoration(
+                      hintText: 'Digite seu alimento aqui'),
+                ),
+                TextField(
+                  controller: descriptionDialog,
+                  decoration: const InputDecoration(
+                      hintText: 'Adicione alguma descrição'),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text('Adicionar'),
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: DiariopedColors.background,
@@ -391,7 +430,7 @@ class _AddMealState extends State<AddMeal> {
                               borderColor: DiariopedColors.primary1,
                               textColor: DiariopedColors.primary1,
                               text: 'Adicionar manualmente',
-                              onPressed: () {},
+                              onPressed: () => showAddMealDialog(context),
                             ),
                           ),
                         ],
