@@ -1,4 +1,4 @@
-package com.phoenix.diarioped
+package br.com.phoenix.diarioped
 
 import io.flutter.embedding.android.FlutterActivity
 
