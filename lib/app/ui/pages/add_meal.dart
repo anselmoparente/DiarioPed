@@ -43,31 +43,52 @@ class _AddMealState extends State<AddMeal> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            actionsAlignment: MainAxisAlignment.spaceBetween,
             title: const Text('Adicionar Alimento'),
-            content: Column(
-              children: [
-                TextField(
-                  controller: mealDialog,
-                  decoration: const InputDecoration(
-                      hintText: 'Digite seu alimento aqui'),
-                ),
-                TextField(
-                  controller: descriptionDialog,
-                  decoration: const InputDecoration(
-                      hintText: 'Adicione alguma descrição'),
-                ),
-              ],
+            content: IntrinsicHeight(
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    controller: mealDialog,
+                    hint: 'Alimento (Ex: Café com leite)',
+                    label: 'Alimento',
+                  ),
+                ],
+              ),
             ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
+                  mealDialog.clear();
+                  descriptionDialog.clear();
                   Navigator.of(context).pop();
                 },
-                child: Text('Cancelar'),
+                child: const Text('Cancelar'),
               ),
               TextButton(
-                onPressed: () {},
-                child: Text('Adicionar'),
+                onPressed: () {
+                  String food = mealDialog.text;
+
+                  if (food.isNotEmpty) {
+                    if (!controller.meal.contains(food)) {
+                      setState(() {
+                        controller.meal.add(FoodModel(name: food));
+                        meal.clear();
+                        search('');
+                        selectedFood = null;
+                      });
+                    } else {
+                      CustomSnackBar(context).show(
+                        message: 'Você já adicionou esse alimento!',
+                      );
+                    }
+
+                    mealDialog.clear();
+                    descriptionDialog.clear();
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: const Text('Adicionar'),
               ),
             ],
           );
