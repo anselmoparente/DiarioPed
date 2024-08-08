@@ -65,9 +65,15 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<void> resetPassword({required String email}) async {
-    await _auth.setLanguageCode('pt-br');
-    await _auth.sendPasswordResetEmail(email: email);
+  Future<String> resetPassword({required String email}) async {
+    try {
+      await _auth.setLanguageCode('pt-br');
+      await _auth.sendPasswordResetEmail(email: email);
+
+      return 'Enviamos um e-mail com as instruções para redefinir sua senha. Por favor, verifique sua caixa de entrada.';
+    } catch (e) {
+      return 'Ocorreu um erro ao redefinir a senha. Por favor, verifique sua conexão e, se o problema persistir, entre em contato com o suporte.';
+    }
   }
 
   Future<void> login(String email, String password) async {

@@ -39,4 +39,13 @@ class LoginController {
       return (false, 'Credenciais inválidas!');
     }
   }
+
+  Future<String> resetPassword({
+    required String email,
+    required AuthService auth,
+  }) async {
+    String response = await auth.resetPassword(email: email);
+
+    return response;
+  }
 }
