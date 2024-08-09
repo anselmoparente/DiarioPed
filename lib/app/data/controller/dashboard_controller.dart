@@ -35,7 +35,9 @@ class DashboardController {
 
       PatientModel patient = PatientModel.fromMap(mapPatient);
 
-      if (!patients.contains(patient)) {
+      bool exists = patients.any((element) => element.id == patient.id);
+
+      if (!exists) {
         patients.add(patient);
       }
     }
