@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:diarioped/app/data/controller/init_controller.dart';
@@ -15,38 +17,44 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   final InitController _controller = InitController();
+  late AuthService _authService;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _authService = context.read<AuthService>();
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      final value = await _controller.tryLogin(auth: _authService);
+
+      if (!mounted) return;
+
+      if (value.$1) {
+        if (value.$2 == 'patient') {
+          GoRouter.of(context).pushReplacementNamed('/patient');
+        } else {
+          GoRouter.of(context).pushReplacementNamed('/home');
+        }
+      } else {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        final bool? termAccept = prefs.getBool('termAccept');
+
+        if (context.mounted) {
+          if (termAccept == true) {
+            GoRouter.of(context).pushReplacementNamed('/access');
+          } else {
+            GoRouter.of(context).pushReplacementNamed('/term');
+          }
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => _controller.tryLogin(auth: context.read<AuthService>()).then(
-        (value) async {
-          if (value.$1) {
-            if (value.$2 == 'patient') {
-              GoRouter.of(context).pushReplacementNamed('/patient');
-            } else {
-              GoRouter.of(context).pushReplacementNamed('/home');
-            }
-          } else {
-            final SharedPreferences prefs =
-                await SharedPreferences.getInstance();
-
-            final bool? termAccept = prefs.getBool('termAccept');
-
-            if (context.mounted) {
-              if (termAccept == true) {
-                GoRouter.of(context).pushReplacementNamed('/access');
-              } else {
-                GoRouter.of(context).pushReplacementNamed('/term');
-              }
-            }
-          }
-        },
-      ),
-    );
 
     return Scaffold(
       backgroundColor: Colors.white,
