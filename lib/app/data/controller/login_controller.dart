@@ -40,12 +40,18 @@ class LoginController {
     }
   }
 
-  Future<String> resetPassword({
+  Future<(bool, String?)> resetPassword({
     required String email,
     required AuthService auth,
   }) async {
-    String response = await auth.resetPassword(email: email);
-
-    return response;
+    try {
+      final response = await auth.resetPassword(email: email);
+      return (true, response);
+    } catch (e) {
+      if (e is AuthException) {
+        return (false, e.message);
+      }
+      return (false, 'Não foi possível redefinir a senha.');
+    }
   }
 }

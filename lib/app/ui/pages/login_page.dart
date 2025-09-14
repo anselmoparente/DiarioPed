@@ -129,17 +129,28 @@ class _LoginPageState extends State<LoginPage> {
                       GestureDetector(
                         onTap: () async {
                           if (isValidEmail(email.text)) {
-                            String response = await controller.resetPassword(
+                            final (success, message) =
+                                await controller.resetPassword(
                               email: email.text,
                               auth: context.read<AuthService>(),
                             );
 
                             if (context.mounted) {
-                              CustomSnackBar(context).show(message: response);
+                              if (success) {
+                                CustomSnackBar(context).show(
+                                  message: message ??
+                                      'Email de redefinição enviado!',
+                                );
+                              } else {
+                                CustomSnackBar(context).show(
+                                  message:
+                                      message ?? 'Erro ao redefinir a senha.',
+                                );
+                              }
                             }
                           } else {
                             CustomSnackBar(context)
-                                .show(message: 'Esse email não é valido!');
+                                .show(message: 'Esse email não é válido!');
                           }
                         },
                         child: Container(
